@@ -1,0 +1,32 @@
+﻿<Window x:Class="RAP_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RAP_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ListBox x:Name="navbar" HorizontalAlignment="Left" Margin="10,50,0,10" VerticalAlignment="Top" Width="100" Background="#FFECECEC" Foreground="Black" BorderBrush="Black" Height="343" VerticalContentAlignment="Top" FontFamily="Segoe UI Semibold">
+            <ListBoxItem Content="Researcher List" />
+            <ListBoxItem Content="Reports" />
+        </ListBox>
+        <TextBox Grid.Row="0" Margin="115,21,520,374" HorizontalAlignment="Stretch" BorderBrush="Black"/>
+        <DataGrid AutoGenerateColumns="True" HorizontalAlignment="Left" Height="343" Margin="115,50,0,0" VerticalAlignment="Top" Width="667" Background="#FFECECEC" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" BorderBrush="Black">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"/>
+                <DataGridTextColumn Header="Name"/>
+                <DataGridTextColumn Header="Level" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="search" Content="Search" HorizontalAlignment="Left" Margin="277,21,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="Button_Click" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <ComboBox HorizontalAlignment="Left" Margin="356,21,0,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" OpacityMask="Black" Height="24">
+            <ComboBoxItem>Level A</ComboBoxItem>
+            <ComboBoxItem>Level B</ComboBoxItem>
+            <ComboBoxItem>Level C</ComboBoxItem>
+            <ComboBoxItem>Level D</ComboBoxItem>
+            <ComboBoxItem>Level E</ComboBoxItem>
+            <ComboBoxItem>Student</ComboBoxItem>
+        </ComboBox>
+    </Grid>
+</Window>
