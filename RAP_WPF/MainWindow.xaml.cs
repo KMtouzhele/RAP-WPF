@@ -79,5 +79,16 @@ namespace RAP_WPF
             ResearcherList.ItemsSource = DBAdapter.AllResearchers();
             SearchBox.Text = "";
         }
+
+        private void SelectResearcher(object sender, MouseButtonEventArgs e)
+        {
+            Researcher selectedresearcher = (Researcher)ResearcherList.SelectedItem;
+            if (selectedresearcher != null)
+            {
+                ResearcherDetail researcherdetail = new ResearcherDetail(selectedresearcher);
+                researcherdetail.Show();
+            }
+        }
+           
     }
 }
