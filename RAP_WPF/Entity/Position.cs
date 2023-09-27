@@ -30,27 +30,18 @@ namespace RAP_WPF.Entity
                     return "Associate Professor";
                 case AllEnum.EmploymentLevel.E:
                     return "Professor";
+                case AllEnum.EmploymentLevel.Student:
+                    return "Student";
                 default:
                     return "No title found";
             }
         }
 
-        //METHOD: GetTitle
-        public string GetTitle(Researcher researcher)
+        public Position()
         {
-            return researcher.Title.ToString();
+            Level = AllEnum.EmploymentLevel.Student;
         }
-
-
-        public Position(AllEnum.EmploymentLevel level, DateTime start, DateTime end, Researcher researcher)
-        {
-            Level = level;
-            Start = start;
-            End = end;
-            Title = GetTitle(researcher);
-            ToTitle = GetToTitle(level);
-        }
-
+        
         public override string ToString()
         {
             return Level + " " + Start + " " + End + " " + Title;

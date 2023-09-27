@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using RAP_WPF.Entity;
 using RAP_WPF.DataSource;
 
-namespace RAP.Controller
+namespace RAP_WPF.Controller
 {
     public class ResearcherController
     {
@@ -25,8 +25,9 @@ namespace RAP.Controller
 
         public List<Researcher> FilterByName(List<Researcher> researchers, string input)
         {
+            string lowerinput = input.ToLower();
             var r = from researcher in researchers
-                    where researcher.GivenName.Contains(input) || researcher.FamilyName.Contains(input)
+                    where researcher.GivenName.ToLower().Contains(lowerinput) || researcher.FamilyName.ToLower().Contains(lowerinput)
                     select researcher;
             return (List<Researcher>)r.ToList();
         }

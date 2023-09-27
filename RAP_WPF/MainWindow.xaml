@@ -6,27 +6,57 @@
         xmlns:local="clr-namespace:RAP_WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListBox x:Name="navbar" HorizontalAlignment="Left" Margin="10,50,0,10" VerticalAlignment="Top" Width="100" Background="#FFECECEC" Foreground="Black" BorderBrush="Black" Height="343" VerticalContentAlignment="Top" FontFamily="Segoe UI Semibold">
-            <ListBoxItem Content="Researcher List" />
-            <ListBoxItem Content="Reports" />
-        </ListBox>
-        <TextBox Grid.Row="0" Margin="115,21,520,374" HorizontalAlignment="Stretch" BorderBrush="Black"/>
-        <DataGrid AutoGenerateColumns="True" HorizontalAlignment="Left" Height="343" Margin="115,50,0,0" VerticalAlignment="Top" Width="667" Background="#FFECECEC" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" BorderBrush="Black">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID"/>
-                <DataGridTextColumn Header="Name"/>
-                <DataGridTextColumn Header="Level" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="search" Content="Search" HorizontalAlignment="Left" Margin="277,21,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="Button_Click" Background="#FFDDDDDD" BorderBrush="Black"/>
-        <ComboBox HorizontalAlignment="Left" Margin="356,21,0,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" OpacityMask="Black" Height="24">
-            <ComboBoxItem>Level A</ComboBoxItem>
-            <ComboBoxItem>Level B</ComboBoxItem>
-            <ComboBoxItem>Level C</ComboBoxItem>
-            <ComboBoxItem>Level D</ComboBoxItem>
-            <ComboBoxItem>Level E</ComboBoxItem>
-            <ComboBoxItem>Student</ComboBoxItem>
-        </ComboBox>
-    </Grid>
+    <Border Padding="10">
+        <StackPanel>
+            <!-- Title -->
+            <Grid Background="LightGray" Height="40">
+                <TextBlock Text="RAP SYSTEM" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="1" Name="SearchBox" Margin="0,0,10,0"/>
+                <Button Grid.Column="2" Name="SearchButton" Content="Search" Click="Search"/>
+                <ComboBox Grid.Column="3" Name="FilterByLevel" SelectionChanged="filtered" Margin="20,0,10,0">
+                    <ComboBoxItem Content="Level A"/>
+                    <ComboBoxItem Content="Level B"/>
+                    <ComboBoxItem Content="Level C"/>
+                    <ComboBoxItem Content="Level D"/>
+                    <ComboBoxItem Content="Level E"/>
+                    <ComboBoxItem Content="Student"/>
+                </ComboBox>
+                <Button Grid.Column="4" Content="Reset" Click="Reset"/>
+            </Grid>
+            
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Navbar -->
+                <ListBox Grid.Column="0" Height="300" Margin="0,0,10,0">
+                    <ListBoxItem Content="Researcher List"/>
+                    <ListBoxItem Content="Reports"/>
+                </ListBox>
+
+                <!-- Dataform -->
+                <DataGrid Grid.Column="1" Name="ResearcherList" AutoGenerateColumns="False" Height="300">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="100" Header="ID" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Width="200" Header="Name" Binding="{Binding NameShown}"/>
+                        <DataGridTextColumn Width="*" Header="Level" Binding="{Binding Level}"/>
+                        <DataGridTextColumn Width="*" Header="Job Title" Binding="{Binding JobTitle}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+    </Border>
+
 </Window>

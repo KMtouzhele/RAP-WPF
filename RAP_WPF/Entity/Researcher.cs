@@ -18,6 +18,18 @@ namespace RAP_WPF.Entity
         public AllEnum.EmploymentLevel Level { get; set; }
         public string Email { get; set; }
         public string Photo { get; set; }
+        public string JobTitle
+        {
+            get
+            {
+                Position position = new Position();
+                return position.GetToTitle(Level);
+            }
+        }
+        public string NameShown
+        {
+            get { return FamilyName+", "+ GivenName + " (" + Title+") "; }
+        }
 
         public Researcher()
         {

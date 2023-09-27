@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RAP_WPF.Entity;
+using RAP_WPF.DataSource;
+using RAP_WPF.Controller;
 
 namespace RAP_WPF
 {
@@ -23,12 +26,58 @@ namespace RAP_WPF
         public MainWindow()
         {
             InitializeComponent();
+
+            List<Researcher> researchers = DBAdapter.AllResearchers();
+            ResearcherList.ItemsSource = researchers;
  
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void filtered(object sender, SelectionChangedEventArgs e)
         {
+                ComboBoxItem selecteditem = (ComboBoxItem)FilterByLevel.SelectedItem;
+                string selectedcontent = selecteditem.Content.ToString();
+                AllEnum.EmploymentLevel selectedlevel = AllEnum.EmploymentLevel.Student;
+                switch (selectedcontent)
+                {
+                    case "Level A":
+                        selectedlevel = AllEnum.EmploymentLevel.A;
+                        break;
+                    case "Level B":
+                        selectedlevel = AllEnum.EmploymentLevel.B;
+                        break;
+                    case "Level C":
+                        selectedlevel = AllEnum.EmploymentLevel.C;
+                        break;
+                    case "Level D":
+                        selectedlevel = AllEnum.EmploymentLevel.D;
+                        break;
+                    case "Level E":
+                        selectedlevel = AllEnum.EmploymentLevel.E;
+                        break;
+                    case "Student":
+                        selectedlevel = AllEnum.EmploymentLevel.Student;
+                        break;
+                    default:
+                        break;
+                }
+                ResearcherController researcherController = new ResearcherController();
+                List<Researcher> filteredresearchers = researcherController.FilterByLevel(DBAdapter.AllResearchers(), selectedlevel);
+                ResearcherList.ItemsSource = filteredresearchers;
 
+        }
+
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            string input = SearchBox.Text;
+            ResearcherController researchercontroller = new ResearcherController();
+            List<Researcher> filteredresearchers = researchercontroller.FilterByName(DBAdapter.AllResearchers(), input);
+            ResearcherList.ItemsSource = filteredresearchers;
+        }
+
+        private void Reset(object sender, RoutedEventArgs e)
+        {
+            ResearcherList.ItemsSource = DBAdapter.AllResearchers();
+            SearchBox.Text = "";
         }
     }
 }
