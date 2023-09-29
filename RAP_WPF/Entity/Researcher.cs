@@ -18,6 +18,8 @@ namespace RAP_WPF.Entity
         public AllEnum.EmploymentLevel Level { get; set; }
         public string Email { get; set; }
         public string Photo { get; set; }
+        public DateTime UtasStart { get; set; }
+        public DateTime CurrentStart { get; set; }
         public string JobTitle
         {
             get
@@ -26,9 +28,20 @@ namespace RAP_WPF.Entity
                 return position.GetToTitle(Level);
             }
         }
+
         public string NameShown
         {
-            get { return FamilyName+", "+ GivenName + " (" + Title+") "; }
+            get { return FamilyName + ", " + GivenName + " (" + Title + ") "; }
+        }
+
+        public float Tenure
+        {
+            get
+            {
+                TimeSpan period = DateTime.Today - UtasStart;
+                float tenure = (float)period.TotalDays / 365;
+                return tenure;
+            }
         }
 
         public Researcher()

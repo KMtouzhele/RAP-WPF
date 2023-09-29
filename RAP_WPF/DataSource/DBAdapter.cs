@@ -108,6 +108,8 @@ namespace RAP_WPF.DataSource
                         Email = rdr.GetString(7),
                         Photo = rdr.GetString(8),
                         Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11)),
+                        UtasStart = rdr.GetDateTime(12),
+                        CurrentStart = rdr.GetDateTime(13),
                     });
                 }
             }

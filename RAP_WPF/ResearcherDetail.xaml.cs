@@ -20,9 +20,20 @@ namespace RAP_WPF
     /// </summary>
     public partial class ResearcherDetail : Window
     {
+        public ImageSource PhotoSource { get; set; }
+        public string NameInDetail { get; set; }
+        public string JobTitle { get; set; }
+        public string School { get; set; }
+        public string Campus { get; set; }
+        public string Email { get; set; }
+        public string UtasStart { get; set; }
+        public string CurrentStart { get; set; }
+        public string Tenure { get; set; }
+
         public ResearcherDetail(Researcher researcher)
         {
             InitializeComponent();
+            DataContext = this;
         }
     }
 }
