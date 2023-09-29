@@ -107,6 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataSource\XmlAdapter.cs" />
     <Compile Include="ResearcherDetail.xaml.cs">
       <DependentUpon>ResearcherDetail.xaml</DependentUpon>
     </Compile>
@@ -164,6 +165,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="DataSource\PublicationRecord.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DataSource\Fundings_Rankings.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
