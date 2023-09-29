@@ -39,5 +39,6 @@ namespace RAP_WPF.Controller
                     select researcher;
             return (List<Researcher>)r.ToList();
         }
+
     }
 }

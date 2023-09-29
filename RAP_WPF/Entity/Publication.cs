@@ -8,6 +8,7 @@ namespace RAP_WPF.Entity
 {
     public class Publication
     {
+        public string Id { get; set; }
         public string DOI { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
@@ -15,8 +16,9 @@ namespace RAP_WPF.Entity
         public int Year { get; set; }
         public AllEnum.OutputType Type { get; set; }
         public string CiteAs { get; set; }
-        public DateTime Avaliable { get; set; }
-        public int Age => GetAge(Avaliable);
+        public DateTime Available { get; set; }
+        public int Age => GetAge(Available);
+    
 
         public Publication()
         {
@@ -25,6 +27,7 @@ namespace RAP_WPF.Entity
             Author = "";
             CiteAs = "";
         }
+
 
         //METHOD: GetAge
         int GetAge(DateTime avaliable)
@@ -36,7 +39,7 @@ namespace RAP_WPF.Entity
 
         public override string ToString()
         {
-            return DOI + " " + Title + " " + Author + " " + Year + " " + Type + " " + CiteAs + " " + Avaliable + " " + Age;
+            return DOI + " " + Title + " " + Author + " " + Year + " " + Type + " " + CiteAs + " " + Available + " " + Age;
         }
 
     }

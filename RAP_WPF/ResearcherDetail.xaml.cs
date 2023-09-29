@@ -29,6 +29,8 @@ namespace RAP_WPF
         public string UtasStart { get; set; }
         public string CurrentStart { get; set; }
         public string Tenure { get; set; }
+        public string Q1Percentage { get; set; }
+        public string ThreeYearAverage { get; set; }
 
         public ResearcherDetail(Researcher researcher)
         {

@@ -95,6 +95,8 @@ namespace RAP_WPF
                 researcherdetail.UtasStart = selectedresearcher.UtasStart.ToString("yyyy-MM-dd");
                 researcherdetail.CurrentStart = selectedresearcher.CurrentStart.ToString("yyyy-MM-dd");
                 researcherdetail.Tenure = selectedresearcher.Tenure.ToString("0.00") + " years";
+                researcherdetail.Q1Percentage = selectedresearcher.Q1Percentage.ToString();
+                researcherdetail.ThreeYearAverage = selectedresearcher.ThreeYearAverage.ToString();
                 researcherdetail.Show();
             }
         }

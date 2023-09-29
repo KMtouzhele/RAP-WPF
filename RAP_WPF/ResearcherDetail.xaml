@@ -53,9 +53,9 @@
                         <TextBlock Text="Previous positions" FontWeight="Bold"/>
                         <TextBlock Margin="0,0,0,10"/>
                         <TextBlock Text="Q1 percentage" FontWeight="Bold"/>
-                        <TextBlock Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding Q1Percentage}" Margin="0,0,0,10"/>
                         <TextBlock Text="3 year average" FontWeight="Bold"/>
-                        <TextBlock Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding ThreeYearAverage}" Margin="0,0,0,10"/>
                         <TextBlock Text="Performance by publications" FontWeight="Bold"/>
                         <TextBlock Margin="0,0,0,10"/>
                         <TextBlock Text="Performance by funding" FontWeight="Bold"/>

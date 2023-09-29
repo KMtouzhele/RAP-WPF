@@ -10,6 +10,7 @@ namespace RAP_WPF.Controller
 {
     class PublicationController
     {
+
         public List<Researcher_Publication> LoadDOIsFor(int id, List<Researcher_Publication> relations)
         {
             var rp = from relation in relations
@@ -22,6 +23,24 @@ namespace RAP_WPF.Controller
         public List<Publication> LoadAllPublications()
         {
             return DBAdapter.AllPublications();
+        }
+
+        public List<Publication> LoadPubCountFor(string givenname, string familyname, List<Publication> publications)
+        {
+            string name = givenname + " " + familyname;
+            var selectedpub = from pub in publications
+                              where pub.Author.Contains(name)
+                              select pub;
+            return (List<Publication>)selectedpub.ToList();
+        }
+
+        public List<Publication> LoadPubBy3Year(Researcher researcher, List<Publication> publications)
+        {
+            var selectedpub = from pub in publications
+                              where pub.Author.Contains(researcher.GivenName + " " + researcher.FamilyName)
+                              where pub.Year >= DateTime.Today.Year - 3
+                              select pub;
+            return (List<Publication>)selectedpub.ToList();
         }
 
         public List<Researcher_Publication> LoadAllRelations()

@@ -57,7 +57,7 @@ namespace RAP_WPF.DataSource
                         Year = rdr.GetInt32(4),
                         Type = ParseEnum<AllEnum.OutputType>(rdr.GetString(5)),
                         CiteAs = rdr.GetString(6),
-                        Avaliable = rdr.GetDateTime(7)
+                        Available = rdr.GetDateTime(7)
                     });
                 }
             }

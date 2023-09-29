@@ -17,7 +17,7 @@ namespace RAP_WPF.Entity
             int count = 0;
             for (int i = 0; i < publications.Count; i++)
             {
-                if (publications[i].Avaliable > DateTime.Today.AddYears(-3))
+                if (publications[i].Available > DateTime.Today.AddYears(-3))
                 {
                     count = count + 1;
                 }

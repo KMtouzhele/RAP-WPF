@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RAP_WPF.DataSource;
+using RAP_WPF.Controller;
 
 namespace RAP_WPF.Entity
 {
@@ -41,6 +43,34 @@ namespace RAP_WPF.Entity
                 TimeSpan period = DateTime.Today - UtasStart;
                 float tenure = (float)period.TotalDays / 365;
                 return tenure;
+            }
+        }
+        public float Q1Percentage
+        {
+            get
+            {
+                PublicationController publicationcontroller = new PublicationController();
+                List<Publication> publications = publicationcontroller.LoadPubCountFor(GivenName, FamilyName, DBAdapter.AllPublications());
+                int count = publications.Count;
+                var q1 = from pub in publications
+                         where pub.Ranking == AllEnum.OutputRanking.Q1
+                         select pub;
+                int q1count = q1.Count();
+                float q1percentage = (float)q1count / count;
+                return q1percentage;
+
+            }
+        }
+
+        public float ThreeYearAverage
+        {
+            get
+            {
+                PublicationController publicationcontroller = new PublicationController();
+                List<Publication> publications = publicationcontroller.LoadPubBy3Year(this, DBAdapter.AllPublications());
+                int threeyearcount = publications.Count;
+                float threeyearaverage = (float)threeyearcount / 3;
+                return threeyearaverage;
             }
         }
 
