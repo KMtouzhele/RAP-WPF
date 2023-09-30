@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RAP_WPF.DataSource;
 using RAP_WPF.Controller;
+using System.Diagnostics;
 
 namespace RAP_WPF.Entity
 {
@@ -22,6 +23,8 @@ namespace RAP_WPF.Entity
         public string Photo { get; set; }
         public DateTime UtasStart { get; set; }
         public DateTime CurrentStart { get; set; }
+        public int Supervisor { get; set; }
+
         public string JobTitle
         {
             get
@@ -74,6 +77,53 @@ namespace RAP_WPF.Entity
             }
         }
 
+        public float PerformanceByPublicaton
+        {
+            get
+            {
+                PublicationController publicationcontroller = new PublicationController();
+                List<Publication> publications = publicationcontroller.LoadPubSinceCommence(this, DBAdapter.AllPublications());
+                float performancebypublication = publications.Count / Tenure;
+                return performancebypublication;
+            }
+        }
+
+        public float PerformanceByFunding //PROBLEM WITH THIS ATTRIBUTE
+        {
+            get
+            {
+                PublicationController publicationcontroller = new PublicationController();
+                List<Publication> publications = publicationcontroller.LoadPubFunding(this, XmlAdapter.LoadAll());
+
+                int totalfunding = publications.Sum(pub => pub.Funding);
+
+                float performancebyfunding = totalfunding / Tenure;
+                return performancebyfunding;
+            }
+        }
+
+        public List<Researcher> Supervision
+        {
+            get
+            {
+                ResearcherController researcherController = new ResearcherController();
+                List<Researcher> researchers = researcherController.LoadSupervision(this, DBAdapter.AllResearchers());
+                return researchers;
+            }
+        }
+
+        public string StudentNames
+        {
+            get
+            {
+                string names = "";
+                for(int i = 0; i< Supervision.Count; i++)
+                {
+                    names = names + Supervision[i].NameShown +"\n";
+                }
+                return names;
+            }
+        }
         public Researcher()
         {
             Id = -1;

@@ -57,14 +57,34 @@
                         <TextBlock Text="3 year average" FontWeight="Bold"/>
                         <TextBlock Text="{Binding ThreeYearAverage}" Margin="0,0,0,10"/>
                         <TextBlock Text="Performance by publications" FontWeight="Bold"/>
-                        <TextBlock Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding PerformanceByPublications}" Margin="0,0,0,10"/>
                         <TextBlock Text="Performance by funding" FontWeight="Bold"/>
-                        <TextBlock Margin="0,0,0,10"/>
-                        <TextBlock Text="Supervision" FontWeight="Bold"/>
-                        <TextBlock Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding PerformanceByFunding}" Margin="0,0,0,10"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Supervision" FontWeight="Bold"/>
+                            <TextBlock  Grid.Column="1" Text="{Binding SupervisionNumber}"/>
+                        </Grid>
+                        <Expander Name="myExpander" HorizontalAlignment="Left" Header="Click to expand" ExpandDirection="Down" IsExpanded="False">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding StudentNames}"> </TextBlock>
+                        </Expander>
+
                     </StackPanel>
                     <Grid Grid.Column="2">
-                        <DataGrid></DataGrid>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Publication List" FontWeight="Bold" Margin="0,0,0,10" />
+                            <DataGrid AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="1*" Header="Publication year"/>
+                                    <DataGridTextColumn Width="1*" Header="Title"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                        
                     </Grid>
                 </Grid>
             </Border>

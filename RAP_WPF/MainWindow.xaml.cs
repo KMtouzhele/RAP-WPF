@@ -97,6 +97,10 @@ namespace RAP_WPF
                 researcherdetail.Tenure = selectedresearcher.Tenure.ToString("0.00") + " years";
                 researcherdetail.Q1Percentage = selectedresearcher.Q1Percentage.ToString();
                 researcherdetail.ThreeYearAverage = selectedresearcher.ThreeYearAverage.ToString();
+                researcherdetail.PerformanceByPublications = selectedresearcher.PerformanceByPublicaton.ToString("0.00") + " publications per year";
+                researcherdetail.PerformanceByFunding = "AUD " + selectedresearcher.PerformanceByFunding.ToString();
+                researcherdetail.SupervisionNumber = selectedresearcher.Supervision.Count.ToString() + " student(s)";
+                researcherdetail.StudentNames = selectedresearcher.StudentNames;
                 researcherdetail.Show();
             }
         }

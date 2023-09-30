@@ -91,7 +91,7 @@ namespace RAP_WPF.DataSource
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select id, type, given_name, family_name, title, unit, campus, IFNULL(email , ' '), IFNULL(photo , ' '), degree, supervisor_id, IFNULL(level , 'Student'), utas_start, current_start from researcher", conn);
+                MySqlCommand cmd = new MySqlCommand("select id, type, given_name, family_name, title, unit, campus, IFNULL(email , ' '), IFNULL(photo , ' '), degree, IFNULL(supervisor_id, '0'), IFNULL(level , 'Student'), utas_start, current_start from researcher", conn);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
@@ -110,6 +110,7 @@ namespace RAP_WPF.DataSource
                         Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11)),
                         UtasStart = rdr.GetDateTime(12),
                         CurrentStart = rdr.GetDateTime(13),
+                        Supervisor = Int32.Parse(rdr.GetString(10)),
                     });
                 }
             }

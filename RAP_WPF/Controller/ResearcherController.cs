@@ -32,13 +32,20 @@ namespace RAP_WPF.Controller
             return (List<Researcher>)r.ToList();
         }
 
-        public List<Researcher> LoadResearcherDetials(List<Researcher> researchers, int id)
+        public List<Researcher> LoadResearcherDetials(List<Researcher> researchers, Researcher researcher)
         {
-            var r = from researcher in researchers
-                    where researcher.Id == id
-                    select researcher;
+            var r = from researcher1 in researchers
+                    where researcher1.Id == researcher.Id
+                    select researcher1;
             return (List<Researcher>)r.ToList();
         }
 
+        public List<Researcher> LoadSupervision(Researcher researcher, List<Researcher> researchers)
+        {
+            var s = from student in researchers
+                    where student.Supervisor == researcher.Id
+                    select student;
+            return (List<Researcher>)s.ToList();
+        }
     }
 }

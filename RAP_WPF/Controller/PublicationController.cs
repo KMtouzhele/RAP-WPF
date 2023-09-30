@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RAP_WPF.Entity;
 using RAP_WPF.DataSource;
+using System.Diagnostics;
 
 namespace RAP_WPF.Controller
 {
@@ -40,6 +41,30 @@ namespace RAP_WPF.Controller
                               where pub.Author.Contains(researcher.GivenName + " " + researcher.FamilyName)
                               where pub.Year >= DateTime.Today.Year - 3
                               select pub;
+            return (List<Publication>)selectedpub.ToList();
+        }
+
+        public List<Publication> LoadPubSinceCommence(Researcher researcher, List<Publication> publications)
+        {
+            var selectedpub = from pub in publications
+                              where pub.Available >= researcher.UtasStart
+                              select pub;
+            return (List<Publication>)selectedpub.ToList();
+        }
+
+        public List<Publication> LoadPubFunding(Researcher researcher, List<Publication> publications)
+        {
+            var selectedpub = from pub in publications
+                              where pub.Staff.Contains(researcher.Id.ToString())
+                              where pub.Available >= researcher.UtasStart
+                              select pub;
+            Debug.WriteLine("Selected Publications for Researcher " + researcher.Id + ":");
+            foreach (var pub in selectedpub)
+            {
+                Debug.WriteLine($"Publication ID: {pub.Id}, Funding: {pub.Funding}, Available: {pub.Available}"); 
+}
+
+
             return (List<Publication>)selectedpub.ToList();
         }
 

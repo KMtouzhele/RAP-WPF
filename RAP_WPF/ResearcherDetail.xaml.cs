@@ -31,11 +31,20 @@ namespace RAP_WPF
         public string Tenure { get; set; }
         public string Q1Percentage { get; set; }
         public string ThreeYearAverage { get; set; }
+        public string PerformanceByPublications { get; set; }
+        public string PerformanceByFunding { get; set; }
+        public string SupervisionNumber { get; set; }
+        public string StudentNames { get; set; }
 
         public ResearcherDetail(Researcher researcher)
         {
             InitializeComponent();
             DataContext = this;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

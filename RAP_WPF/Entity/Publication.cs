@@ -17,6 +17,8 @@ namespace RAP_WPF.Entity
         public AllEnum.OutputType Type { get; set; }
         public string CiteAs { get; set; }
         public DateTime Available { get; set; }
+        public int Funding { get; set; }
+        public List<string> Staff { get; set; }
         public int Age => GetAge(Available);
     
 
