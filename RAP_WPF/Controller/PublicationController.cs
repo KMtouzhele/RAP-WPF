@@ -12,13 +12,18 @@ namespace RAP_WPF.Controller
     class PublicationController
     {
 
-        public List<Researcher_Publication> LoadDOIsFor(int id, List<Researcher_Publication> relations)
+        public List<Publication> LoadPubFor(Researcher researcher, List<Researcher_Publication> relations)
         {
-            var rp = from relation in relations
-                     where relation.Id == id
-                     select relation;
-
-            return (List<Researcher_Publication>)rp.ToList();
+            var doi = from r in relations
+                      where r.Id == researcher.Id
+                      select r.DOI;
+            List<string> dois = doi.ToList();
+            List<Publication> AllPub = DBAdapter.AllPublications();
+            var p = from pub in AllPub
+                    join DOI in dois
+                    on pub.DOI equals DOI
+                    select pub;
+            return (List<Publication>)p.ToList();
         }
 
         public List<Publication> LoadAllPublications()

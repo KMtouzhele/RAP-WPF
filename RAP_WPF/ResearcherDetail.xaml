@@ -77,10 +77,10 @@
                     <Grid Grid.Column="2">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Publication List" FontWeight="Bold" Margin="0,0,0,10" />
-                            <DataGrid AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" >
+                            <DataGrid Name="PublicationList" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" >
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Width="1*" Header="Publication year"/>
-                                    <DataGridTextColumn Width="1*" Header="Title"/>
+                                    <DataGridTextColumn Width="1*" Header="Publication year" Binding="{Binding Year}"/>
+                                    <DataGridTextColumn Width="1*" Header="Title" Binding="{Binding PubTitle}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>

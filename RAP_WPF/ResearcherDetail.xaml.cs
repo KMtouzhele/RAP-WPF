@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RAP_WPF.Entity;
-
+using RAP_WPF.DataSource;
+using RAP_WPF.Controller;
 namespace RAP_WPF
 {
     /// <summary>
@@ -35,6 +36,8 @@ namespace RAP_WPF
         public string PerformanceByFunding { get; set; }
         public string SupervisionNumber { get; set; }
         public string StudentNames { get; set; }
+        public string Year { get; set; }
+        public string PubTitle { get; set; }
 
         public ResearcherDetail(Researcher researcher)
         {
