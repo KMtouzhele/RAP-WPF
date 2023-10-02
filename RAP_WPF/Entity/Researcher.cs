@@ -24,20 +24,18 @@ namespace RAP_WPF.Entity
         public DateTime UtasStart { get; set; }
         public DateTime CurrentStart { get; set; }
         public int Supervisor { get; set; }
-
-        public string JobTitle
+        public string NameShown { get; set; }
+        public string JobTitle{ get; set; }
+        /*public string JobTitle
         {
             get
             {
                 Position position = new Position();
                 return position.GetToTitle(Level);
             }
-        }
+        }*/
 
-        public string NameShown
-        {
-            get { return FamilyName + ", " + GivenName + " (" + Title + ") "; }
-        }
+        
 
         public float Tenure
         {
@@ -124,14 +122,14 @@ namespace RAP_WPF.Entity
                 return names;
             }
         }
-        public Researcher()
+/*        public Researcher()
         {
             Id = -1;
             GivenName = "";
             FamilyName = "";
             School = "";
 
-        }
+        }*/
 
 
 

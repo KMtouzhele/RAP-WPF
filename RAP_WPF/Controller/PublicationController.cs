@@ -68,6 +68,26 @@ namespace RAP_WPF.Controller
             return (List<Publication>)selectedpub.ToList();
         }
 
+        public List<Publication> LoadPublicationFor(Researcher researcher)
+        {
+            List<Publication> AllPub = DBAdapter.AllPublications();
+            List<Researcher_Publication> AllResearcherPublication = DBAdapter.Relation();
+            var relation = from r_p in AllResearcherPublication
+                           where researcher.Id == r_p.Id
+                           select r_p;
+
+            /* List<Researcher_Publication> r_ps = (List<Researcher_Publication>)relation.ToList();*/
+            List<string> researcherDOIs = relation.Select(r_p => r_p.DOI).ToList();
+
+            var p = from pub in AllPub
+                    where researcherDOIs.Contains(pub.DOI)
+                    select pub;
+
+            return (List<Publication>)p.ToList();
+        }
+
+
+
         public List<Researcher_Publication> LoadAllRelations()
         {
             return DBAdapter.Relation();

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RAP_WPF.Entity;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace RAP_WPF.DataSource
 {
@@ -43,7 +44,7 @@ namespace RAP_WPF.DataSource
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select doi, title, ranking, authors, year, type, cite_as, available from publication", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from publication", conn);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
@@ -83,7 +84,7 @@ namespace RAP_WPF.DataSource
         public static List<Researcher> AllResearchers()
         {
             List<Researcher> researchers = new List<Researcher>();
-
+            Position position = new Position();
             MySqlConnection conn = GetConnection();
             MySqlDataReader rdr = null;
 
@@ -102,6 +103,7 @@ namespace RAP_WPF.DataSource
                         Type = ParseEnum<AllEnum.ReseacherType>(rdr.GetString(1)),
                         GivenName = rdr.GetString(2),
                         FamilyName = rdr.GetString(3),
+                        NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")",
                         Title = ParseEnum<AllEnum.Title>(rdr.GetString(4)),
                         School = rdr.GetString(5),
                         //Campus = ParseEnum<AllEnum.Campus>(rdr.GetString(6)),
@@ -111,6 +113,7 @@ namespace RAP_WPF.DataSource
                         UtasStart = rdr.GetDateTime(12),
                         CurrentStart = rdr.GetDateTime(13),
                         Supervisor = Int32.Parse(rdr.GetString(10)),
+                        JobTitle = position.GetToTitle(ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11))),
                     });
                 }
             }

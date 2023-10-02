@@ -16,9 +16,9 @@
             <Border Padding="0,10,0,10">
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Vertical">
                         <Image VerticalAlignment="Top" Name="Photo"  Margin="0,0,0,10" Width="240" HorizontalAlignment="Left" Source="{Binding PhotoSource}"/>
@@ -77,10 +77,16 @@
                     <Grid Grid.Column="2">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Publication List" FontWeight="Bold" Margin="0,0,0,10" />
-                            <DataGrid AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" >
+                            <DataGrid AutoGenerateColumns="False" Name="PublicationList" SelectionChanged="DataGrid_SelectionChanged" CanUserAddRows="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Width="1*" Header="Publication year"/>
-                                    <DataGridTextColumn Width="1*" Header="Title"/>
+                                    <DataGridTextColumn Width="auto" Header="Publication year" Binding="{Binding Year}"/>
+                                    <DataGridTextColumn Width="1*" Header="Title" Binding="{Binding Title}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>

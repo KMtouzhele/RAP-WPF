@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RAP_WPF.Entity;
+using RAP_WPF.DataSource;
+using RAP_WPF.Controller;
 
 namespace RAP_WPF
 {
@@ -40,6 +42,9 @@ namespace RAP_WPF
         {
             InitializeComponent();
             DataContext = this;
+            PublicationController publicationController = new PublicationController();
+            List<Publication> publications = publicationController.LoadPublicationFor(researcher);
+            PublicationList.ItemsSource = publications;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

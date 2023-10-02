@@ -51,7 +51,7 @@
                 </ListBox>
 
                 <!-- Dataform -->
-                <DataGrid Grid.Column="1" Name="ResearcherList" AutoGenerateColumns="False" MouseDoubleClick="SelectResearcher" Height="300" >
+                <DataGrid Grid.Column="1" Name="ResearcherList" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="SelectResearcher" Height="300" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="100" Header="ID" Binding="{Binding Id}"/>
                         <DataGridTextColumn Width="200" Header="Name" Binding="{Binding NameShown}"/>

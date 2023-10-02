@@ -83,6 +83,7 @@ namespace RAP_WPF
         private void SelectResearcher(object sender, MouseButtonEventArgs e)
         {
             Researcher selectedresearcher = (Researcher)ResearcherList.SelectedItem;
+
             if (selectedresearcher != null)
             {
                 ResearcherDetail researcherdetail = new ResearcherDetail(selectedresearcher);
