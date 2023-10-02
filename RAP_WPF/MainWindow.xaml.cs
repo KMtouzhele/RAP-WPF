@@ -83,6 +83,8 @@ namespace RAP_WPF
         private void SelectResearcher(object sender, MouseButtonEventArgs e)
         {
             Researcher selectedresearcher = (Researcher)ResearcherList.SelectedItem;
+            ResearcherController researcherController = new ResearcherController();
+            PublicationController publicationController = new PublicationController();
 
             if (selectedresearcher != null)
             {
@@ -97,9 +99,9 @@ namespace RAP_WPF
                 researcherdetail.CurrentStart = selectedresearcher.CurrentStart.ToString("yyyy-MM-dd");
                 researcherdetail.Tenure = selectedresearcher.Tenure.ToString("0.00") + " years";
                 researcherdetail.Q1Percentage = selectedresearcher.Q1Percentage.ToString();
-                researcherdetail.ThreeYearAverage = selectedresearcher.ThreeYearAverage.ToString();
-                researcherdetail.PerformanceByPublications = selectedresearcher.PerformanceByPublicaton.ToString("0.00") + " publications per year";
-                researcherdetail.PerformanceByFunding = "AUD " + selectedresearcher.PerformanceByFunding.ToString();
+                researcherdetail.ThreeYearAverage = publicationController.ThreeYearAverage(selectedresearcher).ToString();
+                researcherdetail.PerformanceByPublications = selectedresearcher.PerformanceByPublicaton.ToString("0") + " publications per year";
+                researcherdetail.PerformanceByFunding = "AUD " + publicationController.FundingPerformance(selectedresearcher).ToString("0.0");
                 researcherdetail.SupervisionNumber = selectedresearcher.Supervision.Count.ToString() + " student(s)";
                 researcherdetail.StudentNames = selectedresearcher.StudentNames;
                 researcherdetail.Show();

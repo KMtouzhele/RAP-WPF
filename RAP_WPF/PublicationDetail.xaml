@@ -1,0 +1,38 @@
+﻿<Window x:Class="RAP_WPF.PublicationDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RAP_WPF"
+        mc:Ignorable="d"
+        Title="PublicationDetail" Height="450" Width="250">
+    <Border Padding="10">
+        <StackPanel>
+            <!-- Title -->
+            <Grid Background="LightGray" Height="40">
+                <TextBlock Text="Publication Detail" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <Border Padding="0,10,0,10">
+                <StackPanel>
+                    <TextBlock Text="DOI" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                    <TextBlock Text="Authors" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                    <TextBlock Text="Publication year" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                    <TextBlock Text="Ranking" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                    <TextBlock Text="Type" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                    <TextBlock Text="Cite as" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                    <TextBlock Text="Availability date" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                    <TextBlock Text="Age" FontWeight="Bold"/>
+                    <TextBlock Text="" Margin="0,0,0,10"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

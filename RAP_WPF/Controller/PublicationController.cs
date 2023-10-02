@@ -35,13 +35,37 @@ namespace RAP_WPF.Controller
             return (List<Publication>)selectedpub.ToList();
         }
 
-        public List<Publication> LoadPubBy3Year(Researcher researcher, List<Publication> publications)
+        public double ThreeYearAverage(Researcher researcher)
         {
+            List<Publication> publications = DBAdapter.AllPublications();
+            double expectednumber = -1;
+            switch (researcher.Level)
+            {
+                case AllEnum.EmploymentLevel.A:
+                    expectednumber = 0.5;
+                    break;
+                case AllEnum.EmploymentLevel.B:
+                    expectednumber = 1;
+                    break;
+                case AllEnum.EmploymentLevel.C:
+                    expectednumber = 2;
+                    break;
+                case AllEnum.EmploymentLevel.D:
+                    expectednumber = 3.2;
+                    break;
+                case AllEnum.EmploymentLevel.E:
+                    expectednumber = 4;
+                    break;
+                default:
+                    break;
+            }
+
             var selectedpub = from pub in publications
                               where pub.Author.Contains(researcher.GivenName + " " + researcher.FamilyName)
                               where pub.Year >= DateTime.Today.Year - 3
                               select pub;
-            return (List<Publication>)selectedpub.ToList();
+            List<Publication> selectedpublications = (List<Publication>)selectedpub.ToList();
+            return selectedpublications.Count / (researcher.Tenure * expectednumber);
         }
 
         public List<Publication> LoadPubSinceCommence(Researcher researcher, List<Publication> publications)
@@ -52,22 +76,23 @@ namespace RAP_WPF.Controller
             return (List<Publication>)selectedpub.ToList();
         }
 
-        public List<Publication> LoadPubFunding(Researcher researcher, List<Publication> publications)
+        public float FundingPerformance(Researcher researcher)
         {
-            var selectedpub = from pub in publications
-                              where pub.Staff.Contains(researcher.Id.ToString())
-                              where pub.Available >= researcher.UtasStart
-                              select pub;
-            Debug.WriteLine("Selected Publications for Researcher " + researcher.Id + ":");
-            foreach (var pub in selectedpub)
-            {
-                Debug.WriteLine($"Publication ID: {pub.Id}, Funding: {pub.Funding}, Available: {pub.Available}"); 
-}
+
+            List<Publication> pubFunding = XmlAdapter.LoadAll();
+            var validpub = from pub in pubFunding
+                            where pub.Staff.Contains(researcher.Id.ToString())
+                            where pub.Year >= researcher.UtasStart.Year
+                            select pub;
 
 
-            return (List<Publication>)selectedpub.ToList();
+            float totalFunding = validpub.Sum(pub => pub.Funding);
+            float performancebyfunding = totalFunding / researcher.Tenure;
+            return performancebyfunding;
+
         }
 
+        //To load publications by specific researcher
         public List<Publication> LoadPublicationFor(Researcher researcher)
         {
             List<Publication> AllPub = DBAdapter.AllPublications();
@@ -76,7 +101,6 @@ namespace RAP_WPF.Controller
                            where researcher.Id == r_p.Id
                            select r_p;
 
-            /* List<Researcher_Publication> r_ps = (List<Researcher_Publication>)relation.ToList();*/
             List<string> researcherDOIs = relation.Select(r_p => r_p.DOI).ToList();
 
             var p = from pub in AllPub
