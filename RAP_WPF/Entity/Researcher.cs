@@ -63,18 +63,6 @@ namespace RAP_WPF.Entity
             }
         }
 
-        public float ThreeYearAverage
-        {
-            get
-            {
-                PublicationController publicationcontroller = new PublicationController();
-                List<Publication> publications = publicationcontroller.LoadPubBy3Year(this, DBAdapter.AllPublications());
-                int threeyearcount = publications.Count;
-                float threeyearaverage = (float)threeyearcount / 3;
-                return threeyearaverage;
-            }
-        }
-
         public float PerformanceByPublicaton
         {
             get
@@ -91,7 +79,7 @@ namespace RAP_WPF.Entity
             get
             {
                 PublicationController publicationcontroller = new PublicationController();
-                List<Publication> publications = publicationcontroller.LoadPubFunding(this, XmlAdapter.LoadAll());
+                List<Publication> publications = XmlAdapter.LoadAll();
 
                 int totalfunding = publications.Sum(pub => pub.Funding);
 

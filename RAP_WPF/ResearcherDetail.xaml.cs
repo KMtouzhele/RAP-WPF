@@ -47,9 +47,24 @@ namespace RAP_WPF
             PublicationList.ItemsSource = publications;
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SelectPublication(object sender, MouseButtonEventArgs e)
         {
+            Publication selectedpublication = (Publication)PublicationList.SelectedItem;
 
+            if (selectedpublication != null)
+            {
+                PublicationDetail publicationDetail = new PublicationDetail(selectedpublication);
+                publicationDetail.DOI = selectedpublication.DOI;
+                publicationDetail.Authors = selectedpublication.Author;
+                publicationDetail.Ranking = selectedpublication.Ranking.ToString();
+                publicationDetail.Type = selectedpublication.Type.ToString();
+                publicationDetail.CiteAs = selectedpublication.CiteAs;
+                publicationDetail.Year = selectedpublication.Year.ToString();
+                publicationDetail.Available = selectedpublication.Available.ToString("yyyy-MM-dd");
+                publicationDetail.Age = selectedpublication.Age.ToString()+ " days";
+                publicationDetail.Show();
+                
+            }
         }
     }
 }

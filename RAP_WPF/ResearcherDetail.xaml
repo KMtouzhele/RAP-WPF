@@ -16,12 +16,12 @@
             <Border Padding="0,10,0,10">
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
-                        <Image VerticalAlignment="Top" Name="Photo"  Margin="0,0,0,10" Width="240" HorizontalAlignment="Left" Source="{Binding PhotoSource}"/>
+                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,5,0">
+                        <Image VerticalAlignment="Top" Name="Photo"  Margin="0,0,0,10" Width="auto" HorizontalAlignment="Left" Source="{Binding PhotoSource}"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -43,7 +43,7 @@
                             </StackPanel>
                         </Grid>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,0,5,0">
                         <TextBlock Text="Commenced with institution" FontWeight="Bold"/>
                         <TextBlock Text="{Binding UtasStart}" Margin="0,0,0,10"/>
                         <TextBlock Text="Commenced current position" FontWeight="Bold"/>
@@ -60,24 +60,42 @@
                         <TextBlock Text="{Binding PerformanceByPublications}" Margin="0,0,0,10"/>
                         <TextBlock Text="Performance by funding" FontWeight="Bold"/>
                         <TextBlock Text="{Binding PerformanceByFunding}" Margin="0,0,0,10"/>
-                        
+
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Supervision" FontWeight="Bold"/>
                             <TextBlock  Grid.Column="1" Text="{Binding SupervisionNumber}"/>
                         </Grid>
                         <Expander Name="myExpander" HorizontalAlignment="Left" Header="Click to expand" ExpandDirection="Down" IsExpanded="False">
-                            <TextBlock TextWrapping="Wrap" Text="{Binding StudentNames}"> </TextBlock>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding StudentNames}"></TextBlock>
                         </Expander>
 
                     </StackPanel>
                     <Grid Grid.Column="2">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" Margin="5,0,5,0">
                             <TextBlock Text="Publication List" FontWeight="Bold" Margin="0,0,0,10" />
-                            <DataGrid AutoGenerateColumns="False" Name="PublicationList" SelectionChanged="DataGrid_SelectionChanged" CanUserAddRows="False">
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Start" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" Margin="0,0,10,0">
+                                    
+                                </ComboBox>
+                                <TextBlock Grid.Column="2" Text="End" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="3" Margin="0,0,10,0">
+
+                                </ComboBox>
+                                <Button Grid.Column="4" Content="Apply" />
+                            </Grid>
+                            <DataGrid AutoGenerateColumns="False" Name="PublicationList" CanUserAddRows="False" MouseDoubleClick="SelectPublication">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" Header="Publication year" Binding="{Binding Year}"/>
                                     <DataGridTextColumn Width="1*" Header="Title" Binding="{Binding Title}">
@@ -90,7 +108,7 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
-                        
+
                     </Grid>
                 </Grid>
             </Border>
