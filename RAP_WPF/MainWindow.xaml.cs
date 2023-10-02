@@ -107,6 +107,19 @@ namespace RAP_WPF
                 researcherdetail.Show();
             }
         }
-           
+
+        private void ReportClicked(object sender, RoutedEventArgs e)
+        {
+            ResearcherList.Visibility = Visibility.Collapsed;
+
+            ReportGrid.Visibility = Visibility.Visible;
+        }
+
+        private void ResearcherListClicked(object sender, RoutedEventArgs e)
+        {
+            ResearcherList.Visibility = Visibility.Visible;
+
+            ReportGrid.Visibility = Visibility.Collapsed;
+        }
     }
 }
