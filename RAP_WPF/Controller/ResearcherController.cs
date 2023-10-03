@@ -47,5 +47,56 @@ namespace RAP_WPF.Controller
                     select student;
             return (List<Researcher>)s.ToList();
         }
+
+        public double ThreeYearAverage(Researcher researcher)
+        {
+            List<Publication> publications = DBAdapter.AllPublications();
+
+            var selectedpub = from pub in publications
+                              where pub.Author.Contains(researcher.GivenName + " " + researcher.FamilyName)
+                              where pub.Year >= DateTime.Today.Year - 3
+                              select pub;
+            List<Publication> selectedpublications = (List<Publication>)selectedpub.ToList();
+            return selectedpublications.Count / 3;
+        }
+        public double Performance(Researcher researcher)
+        {
+            double expectednumber = -1;
+            switch (researcher.Level)
+            {
+                case AllEnum.EmploymentLevel.A:
+                    expectednumber = 0.5;
+                    break;
+                case AllEnum.EmploymentLevel.B:
+                    expectednumber = 1;
+                    break;
+                case AllEnum.EmploymentLevel.C:
+                    expectednumber = 2;
+                    break;
+                case AllEnum.EmploymentLevel.D:
+                    expectednumber = 3.2;
+                    break;
+                case AllEnum.EmploymentLevel.E:
+                    expectednumber = 4;
+                    break;
+                default:
+                    break;
+            }
+
+            double performance = researcher.ThreeYearAverage / expectednumber;
+            return performance;
+        }
+
+        //To load the researcher list based on the calculated performance
+        public List<Researcher> LoadResearcherByPerformance(double bottom, double cap)
+        {
+            List<Researcher> researchers = DBAdapter.AllResearchers();
+            var r = from researcher in researchers
+                    where researcher.Performance >= bottom && researcher.Performance <= cap
+                    select researcher;
+            return (List<Researcher>)r.ToList();
+
+        }
+
     }
 }

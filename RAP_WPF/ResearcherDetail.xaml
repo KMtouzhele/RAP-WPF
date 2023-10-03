@@ -79,21 +79,21 @@
                             <TextBlock Text="Publication List" FontWeight="Bold" Margin="0,0,0,10" />
                             <Grid Margin="0,0,0,10">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.5*"/>
                                     <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Start" VerticalAlignment="Center"/>
-                                <ComboBox Grid.Column="1" Margin="0,0,10,0">
+                                <ComboBox Grid.Column="0" Margin="0,0,0,0">
                                     
                                 </ComboBox>
-                                <TextBlock Grid.Column="2" Text="End" VerticalAlignment="Center"/>
-                                <ComboBox Grid.Column="3" Margin="0,0,10,0">
+                                <TextBlock Grid.Column="1" Text="-" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="2" Margin="0,0,0,0">
 
                                 </ComboBox>
-                                <Button Grid.Column="4" Content="Apply" />
+                                <Button Grid.Column="3" Content="Apply"  Margin="10,0,0,0"/>
+                                <Button Grid.Column="4" Content="Reset"  Margin="5,0,0,0"/>
                             </Grid>
                             <DataGrid AutoGenerateColumns="False" Name="PublicationList" CanUserAddRows="False" MouseDoubleClick="SelectPublication">
                                 <DataGrid.Columns>

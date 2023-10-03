@@ -35,38 +35,7 @@ namespace RAP_WPF.Controller
             return (List<Publication>)selectedpub.ToList();
         }
 
-        public double ThreeYearAverage(Researcher researcher)
-        {
-            List<Publication> publications = DBAdapter.AllPublications();
-            double expectednumber = -1;
-            switch (researcher.Level)
-            {
-                case AllEnum.EmploymentLevel.A:
-                    expectednumber = 0.5;
-                    break;
-                case AllEnum.EmploymentLevel.B:
-                    expectednumber = 1;
-                    break;
-                case AllEnum.EmploymentLevel.C:
-                    expectednumber = 2;
-                    break;
-                case AllEnum.EmploymentLevel.D:
-                    expectednumber = 3.2;
-                    break;
-                case AllEnum.EmploymentLevel.E:
-                    expectednumber = 4;
-                    break;
-                default:
-                    break;
-            }
 
-            var selectedpub = from pub in publications
-                              where pub.Author.Contains(researcher.GivenName + " " + researcher.FamilyName)
-                              where pub.Year >= DateTime.Today.Year - 3
-                              select pub;
-            List<Publication> selectedpublications = (List<Publication>)selectedpub.ToList();
-            return selectedpublications.Count / (researcher.Tenure * expectednumber);
-        }
 
         public List<Publication> LoadPubSinceCommence(Researcher researcher, List<Publication> publications)
         {
@@ -105,6 +74,7 @@ namespace RAP_WPF.Controller
 
             var p = from pub in AllPub
                     where researcherDOIs.Contains(pub.DOI)
+                    orderby pub.Year descending, pub.Title
                     select pub;
 
             return (List<Publication>)p.ToList();

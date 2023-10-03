@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RAP_WPF.DataSource;
 
 namespace RAP_WPF.Entity
 {
@@ -38,6 +39,8 @@ namespace RAP_WPF.Entity
             double days = span.TotalDays;
             return (int)days;
         }
+
+
 
         public override string ToString()
         {

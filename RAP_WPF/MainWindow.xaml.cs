@@ -26,10 +26,14 @@ namespace RAP_WPF
         public MainWindow()
         {
             InitializeComponent();
-
+            ResearcherController researcherController = new ResearcherController();
             List<Researcher> researchers = DBAdapter.AllResearchers();
             ResearcherList.ItemsSource = researchers;
- 
+            Poor.ItemsSource = researcherController.LoadResearcherByPerformance(-999, 0.7);
+            BelowExpectations.ItemsSource = researcherController.LoadResearcherByPerformance(0.7, 1.1);
+            MeetingMinimum.ItemsSource = researcherController.LoadResearcherByPerformance(1.1, 2);
+            StarPerformancer.ItemsSource = researcherController.LoadResearcherByPerformance(2, 999);
+
         }
 
         private void filtered(object sender, SelectionChangedEventArgs e)
@@ -99,9 +103,9 @@ namespace RAP_WPF
                 researcherdetail.CurrentStart = selectedresearcher.CurrentStart.ToString("yyyy-MM-dd");
                 researcherdetail.Tenure = selectedresearcher.Tenure.ToString("0.00") + " years";
                 researcherdetail.Q1Percentage = selectedresearcher.Q1Percentage.ToString();
-                researcherdetail.ThreeYearAverage = publicationController.ThreeYearAverage(selectedresearcher).ToString();
+                researcherdetail.ThreeYearAverage = researcherController.ThreeYearAverage(selectedresearcher).ToString();
                 researcherdetail.PerformanceByPublications = selectedresearcher.PerformanceByPublicaton.ToString("0") + " publications per year";
-                researcherdetail.PerformanceByFunding = "AUD " + publicationController.FundingPerformance(selectedresearcher).ToString("0.0");
+                researcherdetail.PerformanceByFunding = publicationController.FundingPerformance(selectedresearcher).ToString("0,000")+ " AUD/year";
                 researcherdetail.SupervisionNumber = selectedresearcher.Supervision.Count.ToString() + " student(s)";
                 researcherdetail.StudentNames = selectedresearcher.StudentNames;
                 researcherdetail.Show();
@@ -111,6 +115,7 @@ namespace RAP_WPF
         private void ReportClicked(object sender, RoutedEventArgs e)
         {
             ResearcherList.Visibility = Visibility.Collapsed;
+            Controller.Visibility = Visibility.Collapsed;
 
             ReportGrid.Visibility = Visibility.Visible;
         }
@@ -118,6 +123,7 @@ namespace RAP_WPF
         private void ResearcherListClicked(object sender, RoutedEventArgs e)
         {
             ResearcherList.Visibility = Visibility.Visible;
+            Controller.Visibility = Visibility.Visible;
 
             ReportGrid.Visibility = Visibility.Collapsed;
         }

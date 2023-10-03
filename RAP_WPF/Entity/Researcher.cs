@@ -63,6 +63,15 @@ namespace RAP_WPF.Entity
             }
         }
 
+        public double Performance
+        {
+            get
+            {
+                ResearcherController researcherController = new ResearcherController();
+                double performance = researcherController.Performance(this);
+                return performance;
+            }
+        }
         public float PerformanceByPublicaton
         {
             get
@@ -74,7 +83,7 @@ namespace RAP_WPF.Entity
             }
         }
 
-        public float PerformanceByFunding //PROBLEM WITH THIS ATTRIBUTE
+        public float PerformanceByFunding
         {
             get
             {
@@ -110,6 +119,17 @@ namespace RAP_WPF.Entity
                 return names;
             }
         }
+        public double ThreeYearAverage
+        {
+            get
+            {
+                ResearcherController researcherController = new ResearcherController();
+                double threeyearaverage = researcherController.ThreeYearAverage(this);
+                return threeyearaverage;
+            }
+        }
+
+
 /*        public Researcher()
         {
             Id = -1;
