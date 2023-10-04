@@ -16,7 +16,7 @@ namespace RAP_WPF.DataSource
         private static string filePath = "C:\\Users\\kaimol\\source\\repos\\RAP-WPF\\RAP_WPF\\DataSource\\Fundings_Rankings.xml";
         public static List<Publication> LoadAll()
         {
-            Debug.WriteLine("Start loading");
+            /*Debug.WriteLine("Start loading");*/
             XmlDocument xml = new XmlDocument();
             xml.Load(filePath);
 
@@ -30,12 +30,12 @@ namespace RAP_WPF.DataSource
                 publication.Id = node.Attributes["id"].Value;
                 publication.Funding = Int32.Parse(node["Funding"].InnerText);
                 publication.Year = Int32.Parse(node["Year"].InnerText);
-                Debug.WriteLine("Funding is " + publication.Funding);
+                /*Debug.WriteLine("Funding is " + publication.Funding);*/
                 XmlNodeList researcherNode = node.SelectNodes("Researchers/staff_id");
                 List<string> staff = new List<string>();
                 foreach (XmlNode rnode in researcherNode)
                 {
-                    Debug.WriteLine("LoadAll ID "+ rnode.InnerText);
+                    /*Debug.WriteLine("LoadAll ID "+ rnode.InnerText);*/
                     staff.Add(rnode.InnerText);
                 }
                 publication.Staff = staff.ToList();
@@ -45,7 +45,7 @@ namespace RAP_WPF.DataSource
 
             }
 
-            Debug.WriteLine("Projects List:");
+            /*Debug.WriteLine("Projects List:");
             foreach (var project in projects)
             {
                 Debug.WriteLine($"Project ID: {project.Id}, Funding: {project.Funding}, Year: {project.Year}");
@@ -54,7 +54,7 @@ namespace RAP_WPF.DataSource
                 {
                     Debug.WriteLine($" - {researcher}");
                 }
-            }
+            }*/
 
             return projects;
             

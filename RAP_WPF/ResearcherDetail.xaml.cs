@@ -37,12 +37,14 @@ namespace RAP_WPF
         public string PerformanceByFunding { get; set; }
         public string SupervisionNumber { get; set; }
         public string StudentNames { get; set; }
+        public string PreviousPositions { get; set; }
 
         public ResearcherDetail(Researcher researcher)
         {
             InitializeComponent();
             DataContext = this;
             PublicationController publicationController = new PublicationController();
+            ResearcherController researcherController = new ResearcherController();
             List<Publication> publications = publicationController.LoadPublicationFor(researcher);
             PublicationList.ItemsSource = publications;
         }

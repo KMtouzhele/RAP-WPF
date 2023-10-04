@@ -175,5 +175,52 @@ namespace RAP_WPF.DataSource
             }
             return relation;
         }
+
+        public static List<Position> AllPosition()
+        {
+            List<Position> positions = new List<Position>();
+
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("select id, level, start, IFNULL(end, CURDATE()) from position", conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    
+                    Position newPosition = new Position
+                    {
+                        Id = rdr.GetInt32(0),
+                        Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(1)),
+                        Start = rdr.GetDateTime(2),
+                        End = rdr.GetDateTime(3),
+                    };
+                    positions.Add(newPosition);
+                    Debug.WriteLine($"Added Position: Id={newPosition.Id}, Level={newPosition.Level}, Start={newPosition.Start}, End={newPosition.End}");
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("Error connecting to database: " + e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            
+            return positions;
+        }
     }
 }

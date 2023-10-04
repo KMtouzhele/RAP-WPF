@@ -8,13 +8,19 @@ namespace RAP_WPF.Entity
 {
     public class Position
     {
+        public int Id { get; set; }
         public AllEnum.EmploymentLevel Level { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public string Title { get; set; }
         public string ToTitle { get; set; }
 
-
+        public string Title
+        {
+            get
+            {
+                return GetToTitle(Level);
+            }
+        }
         //METHOD: GetToTitle
         public string GetToTitle(AllEnum.EmploymentLevel level)
         {

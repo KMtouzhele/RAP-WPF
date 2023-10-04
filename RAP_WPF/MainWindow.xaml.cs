@@ -108,6 +108,7 @@ namespace RAP_WPF
                 researcherdetail.PerformanceByFunding = publicationController.FundingPerformance(selectedresearcher).ToString("0,000")+ " AUD/year";
                 researcherdetail.SupervisionNumber = selectedresearcher.Supervision.Count.ToString() + " student(s)";
                 researcherdetail.StudentNames = selectedresearcher.StudentNames;
+                researcherdetail.PreviousPositions = researcherController.LoadPreviousPosition(selectedresearcher);
                 researcherdetail.Show();
             }
         }

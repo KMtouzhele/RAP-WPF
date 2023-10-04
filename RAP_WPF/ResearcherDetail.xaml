@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAP_WPF"
         mc:Ignorable="d"
-        Title="ResearcherDetail" Height="600" Width="800">
+        Title="ResearcherDetail" Height="900" Width="1200">
     <Border Padding="10">
         <StackPanel>
             <!-- Title -->
@@ -16,9 +16,9 @@
             <Border Padding="0,10,0,10">
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,5,0">
                         <Image VerticalAlignment="Top" Name="Photo"  Margin="0,0,0,10" Width="auto" HorizontalAlignment="Left" Source="{Binding PhotoSource}"/>
@@ -28,18 +28,20 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Vertical">
-                                <TextBlock Text="Name" FontWeight="Bold"/>
-                                <TextBlock Text="Job Title" FontWeight="Bold"/>
-                                <TextBlock Text="School" FontWeight="Bold"/>
-                                <TextBlock Text="Campus" FontWeight="Bold"/>
-                                <TextBlock Text="Email" FontWeight="Bold"/>
+                                <TextBlock Text="Name" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Text="Job Title" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Text="School" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Text="Campus" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Text="Email" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Text="Previous positions" TextWrapping="Wrap" FontWeight="Bold" Margin="0,0,0,10"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Vertical">
-                                <TextBlock Text="{Binding NameInDetail}"/>
-                                <TextBlock Text="{Binding JobTitle}"/>
-                                <TextBlock Text="{Binding School}"/>
-                                <TextBlock Text="{Binding Campus}" />
-                                <TextBlock Text="{Binding Email}"/>
+                                <TextBlock Text="{Binding NameInDetail}" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding JobTitle}" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding School}" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding Campus}" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding Email}" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding PreviousPositions}" Margin="0,0,0,10"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -50,8 +52,6 @@
                         <TextBlock Text="{Binding CurrentStart}" Margin="0,0,0,10"/>
                         <TextBlock Text="Tenure" FontWeight="Bold"/>
                         <TextBlock Text="{Binding Tenure}" Margin="0,0,0,10"/>
-                        <TextBlock Text="Previous positions" FontWeight="Bold"/>
-                        <TextBlock Margin="0,0,0,10"/>
                         <TextBlock Text="Q1 percentage" FontWeight="Bold"/>
                         <TextBlock Text="{Binding Q1Percentage}" Margin="0,0,0,10"/>
                         <TextBlock Text="3 year average" FontWeight="Bold"/>

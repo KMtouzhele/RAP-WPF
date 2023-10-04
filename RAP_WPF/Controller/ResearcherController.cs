@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RAP_WPF.Entity;
 using RAP_WPF.DataSource;
+using System.Diagnostics;
 
 namespace RAP_WPF.Controller
 {
@@ -98,5 +99,25 @@ namespace RAP_WPF.Controller
 
         }
 
+        //To load previous positions
+        public string LoadPreviousPosition(Researcher researcher)
+        {
+            Debug.WriteLine("Loading positions...");
+            List<Position> AllPosition = DBAdapter.AllPosition();
+            DateTime currentDate = DateTime.Today;
+            var p = from position in AllPosition
+                    where position.Id == researcher.Id
+                    orderby position.End
+                    select position;
+            List<Position> previousposition = (List<Position>)p.ToList();
+            string positions = "";
+            for(int i=0; i<previousposition.Count-1; i++)
+            {
+                //Debug.WriteLine($"Position {i + 1}: Id={previousposition[i].Id}, Level={previousposition[i].Level}, Start={previousposition[i].Start}");
+                positions +=previousposition[i].Start.ToString("yyyy/MM/dd") +" - "+previousposition[i].End.ToString("yyyy/MM/dd") + " "+ previousposition[i].Title+"\n";
+            }
+            //Debug.WriteLine($"Final positions: {positions}");
+            return positions;
+        }
     }
 }
