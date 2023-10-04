@@ -38,6 +38,8 @@ namespace RAP_WPF
         public string SupervisionNumber { get; set; }
         public string StudentNames { get; set; }
         public string PreviousPositions { get; set; }
+        public string Supervisor { get; set; }
+        public string Degree { get; set; }
 
         public ResearcherDetail(Researcher researcher)
         {
@@ -47,6 +49,19 @@ namespace RAP_WPF
             ResearcherController researcherController = new ResearcherController();
             List<Publication> publications = publicationController.LoadPublicationFor(researcher);
             PublicationList.ItemsSource = publications;
+            if(researcher is Student)
+            {
+                ForStudent.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                ForStaff.Visibility = Visibility.Visible;
+                PositionLabel.Visibility = Visibility.Visible;
+                Position.Visibility = Visibility.Visible;
+            }
+
+
         }
 
         private void SelectPublication(object sender, MouseButtonEventArgs e)
@@ -63,7 +78,7 @@ namespace RAP_WPF
                 publicationDetail.CiteAs = selectedpublication.CiteAs;
                 publicationDetail.Year = selectedpublication.Year.ToString();
                 publicationDetail.Available = selectedpublication.Available.ToString("yyyy-MM-dd");
-                publicationDetail.Age = selectedpublication.Age.ToString()+ " days";
+                publicationDetail.Age = selectedpublication.Age.ToString("0,000")+ " days";
                 publicationDetail.Show();
                 
             }

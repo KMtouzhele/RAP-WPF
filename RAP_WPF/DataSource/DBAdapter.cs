@@ -97,25 +97,72 @@ namespace RAP_WPF.DataSource
 
                 while (rdr.Read())
                 {
-                    researchers.Add(new Researcher
+                    Researcher researcher=new Researcher();
+                    researcher.Id = rdr.GetInt32(0);
+                    researcher.Type = ParseEnum<AllEnum.ReseacherType>(rdr.GetString(1));
+                    researcher.GivenName = rdr.GetString(2);
+                    researcher.FamilyName = rdr.GetString(3);
+                    researcher.NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")";
+                    researcher.Title = ParseEnum<AllEnum.Title>(rdr.GetString(4));
+                    researcher.School = rdr.GetString(5);
+                    //researcher.Campus = ParseEnum<AllEnum.Campus>(rdr.GetString(6)),
+                    researcher.Email = rdr.GetString(7);
+                    researcher.Photo = rdr.GetString(8);
+                    researcher.Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11));
+                    researcher.UtasStart = rdr.GetDateTime(12);
+                    researcher.CurrentStart = rdr.GetDateTime(13);
+                    researcher.JobTitle = position.GetToTitle(ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11)));
+                    //Debug.WriteLine("CS is "+ rdr.GetDateTime(13).ToString());
+
+
+                    if (researcher.Type == AllEnum.ReseacherType.Student)
                     {
-                        Id = rdr.GetInt32(0),
-                        Type = ParseEnum<AllEnum.ReseacherType>(rdr.GetString(1)),
-                        GivenName = rdr.GetString(2),
-                        FamilyName = rdr.GetString(3),
-                        NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")",
-                        Title = ParseEnum<AllEnum.Title>(rdr.GetString(4)),
-                        School = rdr.GetString(5),
-                        //Campus = ParseEnum<AllEnum.Campus>(rdr.GetString(6)),
-                        Email = rdr.GetString(7),
-                        Photo = rdr.GetString(8),
-                        Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11)),
-                        UtasStart = rdr.GetDateTime(12),
-                        CurrentStart = rdr.GetDateTime(13),
-                        Supervisor = Int32.Parse(rdr.GetString(10)),
-                        JobTitle = position.GetToTitle(ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11))),
-                    });
+                        Debug.WriteLine("Load Student");
+                        Student student = new Student();
+                        student.Id = rdr.GetInt32(0);
+                        student.Type = ParseEnum<AllEnum.ReseacherType>(rdr.GetString(1));
+                        student.GivenName = rdr.GetString(2);
+                        student.FamilyName = rdr.GetString(3);
+                        student.NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")";
+                        student.Title = ParseEnum<AllEnum.Title>(rdr.GetString(4));
+                        student.School = rdr.GetString(5);
+
+                        student.Email = rdr.GetString(7);
+                        student.Photo = rdr.GetString(8);
+                        student.Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11));
+                        student.UtasStart = rdr.GetDateTime(12);
+                        student.CurrentStart = rdr.GetDateTime(13);
+                        student.JobTitle = position.GetToTitle(ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11)));
+                        student.Degree = rdr.GetString(9);
+                        student.Supervisor = rdr.GetInt32(10);
+                        researcher = student;
+                    }
+
+                    else
+                    {
+                        Debug.WriteLine("Load Staff");
+                        Staff staff = new Staff();
+                        staff.Id = rdr.GetInt32(0);
+                        staff.Type = ParseEnum<AllEnum.ReseacherType>(rdr.GetString(1));
+                        staff.GivenName = rdr.GetString(2);
+                        staff.FamilyName = rdr.GetString(3);
+                        staff.NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")";
+                        staff.Title = ParseEnum<AllEnum.Title>(rdr.GetString(4));
+                        staff.School = rdr.GetString(5);
+
+                        staff.Email = rdr.GetString(7);
+                        staff.Photo = rdr.GetString(8);
+                        staff.Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11));
+                        staff.UtasStart = rdr.GetDateTime(12);
+                        staff.CurrentStart = rdr.GetDateTime(13);
+                        staff.JobTitle = position.GetToTitle(ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11)));
+                        researcher =staff;
+                    }
+                    researchers.Add(researcher);
+                    Debug.WriteLine("Mapped" + researcher.NameShown);
                 }
+
+
             }
             catch (MySqlException e)
             {

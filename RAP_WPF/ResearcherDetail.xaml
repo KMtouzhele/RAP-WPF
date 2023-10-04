@@ -33,7 +33,7 @@
                                 <TextBlock Text="School" FontWeight="Bold" Margin="0,0,0,10"/>
                                 <TextBlock Text="Campus" FontWeight="Bold" Margin="0,0,0,10"/>
                                 <TextBlock Text="Email" FontWeight="Bold" Margin="0,0,0,10"/>
-                                <TextBlock Text="Previous positions" TextWrapping="Wrap" FontWeight="Bold" Margin="0,0,0,10"/>
+                                <TextBlock Name="PositionLabel" Text="Previous positions" TextWrapping="Wrap" FontWeight="Bold" Margin="0,0,0,10" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Vertical">
                                 <TextBlock Text="{Binding NameInDetail}" Margin="0,0,0,10"/>
@@ -41,7 +41,7 @@
                                 <TextBlock Text="{Binding School}" Margin="0,0,0,10"/>
                                 <TextBlock Text="{Binding Campus}" Margin="0,0,0,10"/>
                                 <TextBlock Text="{Binding Email}" Margin="0,0,0,10"/>
-                                <TextBlock Text="{Binding PreviousPositions}" Margin="0,0,0,10"/>
+                                <TextBlock Name="Position" Text="{Binding PreviousPositions}" Margin="0,0,0,10" Visibility="Collapsed"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -54,24 +54,31 @@
                         <TextBlock Text="{Binding Tenure}" Margin="0,0,0,10"/>
                         <TextBlock Text="Q1 percentage" FontWeight="Bold"/>
                         <TextBlock Text="{Binding Q1Percentage}" Margin="0,0,0,10"/>
-                        <TextBlock Text="3 year average" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding ThreeYearAverage}" Margin="0,0,0,10"/>
-                        <TextBlock Text="Performance by publications" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding PerformanceByPublications}" Margin="0,0,0,10"/>
-                        <TextBlock Text="Performance by funding" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding PerformanceByFunding}" Margin="0,0,0,10"/>
+                        <StackPanel Name="ForStaff" Visibility="Collapsed">
+                            <TextBlock Text="3 year average" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ThreeYearAverage}" Margin="0,0,0,10"/>
+                            <TextBlock Text="Performance by publications" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding PerformanceByPublications}" Margin="0,0,0,10"/>
+                            <TextBlock Text="Performance by funding" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding PerformanceByFunding}" Margin="0,0,0,10"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Supervision" FontWeight="Bold"/>
+                                <TextBlock  Grid.Column="1" Text="{Binding SupervisionNumber}"/>
+                            </Grid>
+                            <Expander Name="Expander" HorizontalAlignment="Left" Header="Click to expand" ExpandDirection="Down" IsExpanded="False" Margin="0,0,0,10">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding StudentNames}"></TextBlock>
+                            </Expander>
+                        </StackPanel>
+                        <StackPanel Name="ForStudent" Visibility="Collapsed">
+                            <TextBlock Text="Supervisor" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Supervisor}" Margin="0,0,0,10"/>
+                        </StackPanel>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="75"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Supervision" FontWeight="Bold"/>
-                            <TextBlock  Grid.Column="1" Text="{Binding SupervisionNumber}"/>
-                        </Grid>
-                        <Expander Name="myExpander" HorizontalAlignment="Left" Header="Click to expand" ExpandDirection="Down" IsExpanded="False">
-                            <TextBlock TextWrapping="Wrap" Text="{Binding StudentNames}"></TextBlock>
-                        </Expander>
+
 
                     </StackPanel>
                     <Grid Grid.Column="2">

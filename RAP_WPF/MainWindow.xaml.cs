@@ -104,11 +104,19 @@ namespace RAP_WPF
                 researcherdetail.Tenure = selectedresearcher.Tenure.ToString("0.00") + " years";
                 researcherdetail.Q1Percentage = selectedresearcher.Q1Percentage.ToString();
                 researcherdetail.ThreeYearAverage = researcherController.ThreeYearAverage(selectedresearcher).ToString();
-                researcherdetail.PerformanceByPublications = selectedresearcher.PerformanceByPublicaton.ToString("0") + " publications per year";
-                researcherdetail.PerformanceByFunding = publicationController.FundingPerformance(selectedresearcher).ToString("0,000")+ " AUD/year";
-                researcherdetail.SupervisionNumber = selectedresearcher.Supervision.Count.ToString() + " student(s)";
-                researcherdetail.StudentNames = selectedresearcher.StudentNames;
-                researcherdetail.PreviousPositions = researcherController.LoadPreviousPosition(selectedresearcher);
+                if(selectedresearcher is Student)
+                {
+                    Student selectedstudent = (Student)selectedresearcher;
+                    researcherdetail.Supervisor = researcherController.LoadSupervisor(selectedstudent);
+                }
+                else
+                {
+                    Staff selectedstaff = (Staff)selectedresearcher;
+                    researcherdetail.PerformanceByPublications = selectedstaff.PerformanceByPublicaton.ToString("0") + " publications per year";
+                    researcherdetail.PerformanceByFunding = publicationController.FundingPerformance(selectedresearcher).ToString("0,000") + " AUD/year"; researcherdetail.PreviousPositions = researcherController.LoadPreviousPosition(selectedresearcher);
+                    researcherdetail.SupervisionNumber = researcherController.CalculateSupervision(selectedstaff).ToString();
+                    researcherdetail.StudentNames = researcherController.LoadSupervision(selectedstaff);
+                }
                 researcherdetail.Show();
             }
         }

@@ -41,12 +41,28 @@ namespace RAP_WPF.Controller
             return (List<Researcher>)r.ToList();
         }
 
-        public List<Researcher> LoadSupervision(Researcher researcher, List<Researcher> researchers)
+        public string LoadSupervision(Staff staff)
         {
-            var s = from student in researchers
-                    where student.Supervisor == researcher.Id
+            List<Student> students = DBAdapter.AllResearchers().OfType<Student>().ToList();
+            var s = from student in students
+                    where student.Supervisor == staff.Id
                     select student;
-            return (List<Researcher>)s.ToList();
+            List<Student> supervisions = (List<Student>)s.ToList();
+            string supervisionnames = "";
+            foreach(Student supervision in supervisions)
+            {
+                supervisionnames += supervision.NameShown + "/n";
+            }
+            return supervisionnames;
+        }
+        public int CalculateSupervision(Staff staff)
+        {
+            List<Student> students = DBAdapter.AllResearchers().OfType<Student>().ToList();
+            var s = from student in students
+                    where student.Supervisor == staff.Id
+                    select student;
+            List<Student> supervisions = (List<Student>)s.ToList();
+            return supervisions.Count;
         }
 
         public double ThreeYearAverage(Researcher researcher)
@@ -60,7 +76,7 @@ namespace RAP_WPF.Controller
             List<Publication> selectedpublications = (List<Publication>)selectedpub.ToList();
             return selectedpublications.Count / 3;
         }
-        public double Performance(Researcher researcher)
+        public double Performance(Staff researcher)
         {
             double expectednumber = -1;
             switch (researcher.Level)
@@ -89,13 +105,13 @@ namespace RAP_WPF.Controller
         }
 
         //To load the researcher list based on the calculated performance
-        public List<Researcher> LoadResearcherByPerformance(double bottom, double cap)
+        public List<Staff> LoadResearcherByPerformance(double bottom, double cap)
         {
-            List<Researcher> researchers = DBAdapter.AllResearchers();
-            var r = from researcher in researchers
+            List<Staff> staff = DBAdapter.AllResearchers().OfType<Staff>().ToList();
+            var r = from researcher in staff
                     where researcher.Performance >= bottom && researcher.Performance <= cap
                     select researcher;
-            return (List<Researcher>)r.ToList();
+            return (List<Staff>)r.ToList();
 
         }
 
@@ -111,13 +127,37 @@ namespace RAP_WPF.Controller
                     select position;
             List<Position> previousposition = (List<Position>)p.ToList();
             string positions = "";
-            for(int i=0; i<previousposition.Count-1; i++)
+            if(previousposition.Count <= 1)
             {
-                //Debug.WriteLine($"Position {i + 1}: Id={previousposition[i].Id}, Level={previousposition[i].Level}, Start={previousposition[i].Start}");
-                positions +=previousposition[i].Start.ToString("yyyy/MM/dd") +" - "+previousposition[i].End.ToString("yyyy/MM/dd") + " "+ previousposition[i].Title+"\n";
+                positions = "No previous positions found.";
             }
+            else
+            {
+                for (int i = 0; i < previousposition.Count - 1; i++)
+                {
+                    //Debug.WriteLine($"Position {i + 1}: Id={previousposition[i].Id}, Level={previousposition[i].Level}, Start={previousposition[i].Start}");
+                    positions += previousposition[i].Start.ToString("yyyy-MM-dd") + " to " + previousposition[i].End.ToString("yyyy-MM-dd") + "  " + previousposition[i].Title + "\n";
+                }
+            }
+            
             //Debug.WriteLine($"Final positions: {positions}");
             return positions;
+        }
+        
+        public string LoadSupervisor(Student researcher)
+        {
+            List<Researcher> AllResearcher = DBAdapter.AllResearchers();
+            var s = from supervisor in AllResearcher
+                    where researcher.Supervisor == supervisor.Id
+                    select supervisor;
+            List<Researcher> supervisors = (List<Researcher>)s.ToList();
+            string supervisorname = "";
+            foreach (Researcher supervisor in supervisors)
+            {
+                supervisorname = supervisor.NameShown;
+            }
+            return supervisorname;
+
         }
     }
 }

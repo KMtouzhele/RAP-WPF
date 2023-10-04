@@ -23,7 +23,6 @@ namespace RAP_WPF.Entity
         public string Photo { get; set; }
         public DateTime UtasStart { get; set; }
         public DateTime CurrentStart { get; set; }
-        public int Supervisor { get; set; }
         public string NameShown { get; set; }
         public string JobTitle{ get; set; }
         /*public string JobTitle
@@ -62,82 +61,6 @@ namespace RAP_WPF.Entity
 
             }
         }
-
-        public double Performance
-        {
-            get
-            {
-                ResearcherController researcherController = new ResearcherController();
-                double performance = researcherController.Performance(this);
-                return performance;
-            }
-        }
-        public float PerformanceByPublicaton
-        {
-            get
-            {
-                PublicationController publicationcontroller = new PublicationController();
-                List<Publication> publications = publicationcontroller.LoadPubSinceCommence(this, DBAdapter.AllPublications());
-                float performancebypublication = publications.Count / Tenure;
-                return performancebypublication;
-            }
-        }
-
-        public float PerformanceByFunding
-        {
-            get
-            {
-                PublicationController publicationcontroller = new PublicationController();
-                List<Publication> publications = XmlAdapter.LoadAll();
-
-                int totalfunding = publications.Sum(pub => pub.Funding);
-
-                float performancebyfunding = totalfunding / Tenure;
-                return performancebyfunding;
-            }
-        }
-
-        public List<Researcher> Supervision
-        {
-            get
-            {
-                ResearcherController researcherController = new ResearcherController();
-                List<Researcher> researchers = researcherController.LoadSupervision(this, DBAdapter.AllResearchers());
-                return researchers;
-            }
-        }
-
-        public string StudentNames
-        {
-            get
-            {
-                string names = "";
-                for(int i = 0; i< Supervision.Count; i++)
-                {
-                    names = names + Supervision[i].NameShown +"\n";
-                }
-                return names;
-            }
-        }
-        public double ThreeYearAverage
-        {
-            get
-            {
-                ResearcherController researcherController = new ResearcherController();
-                double threeyearaverage = researcherController.ThreeYearAverage(this);
-                return threeyearaverage;
-            }
-        }
-
-
-/*        public Researcher()
-        {
-            Id = -1;
-            GivenName = "";
-            FamilyName = "";
-            School = "";
-
-        }*/
 
 
 
