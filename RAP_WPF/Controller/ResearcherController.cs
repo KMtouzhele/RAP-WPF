@@ -49,10 +49,14 @@ namespace RAP_WPF.Controller
                     select student;
             List<Student> supervisions = (List<Student>)s.ToList();
             string supervisionnames = "";
-            foreach(Student supervision in supervisions)
+            if (supervisions.Count > 0)
             {
-                supervisionnames += supervision.NameShown + "/n";
+                foreach (Student supervision in supervisions)
+                {
+                    supervisionnames += supervision.NameShown + "\n";
+                }
             }
+            else supervisionnames = "No supervisions found.";
             return supervisionnames;
         }
         public int CalculateSupervision(Staff staff)

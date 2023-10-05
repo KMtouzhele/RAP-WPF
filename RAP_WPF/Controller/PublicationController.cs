@@ -80,7 +80,20 @@ namespace RAP_WPF.Controller
             return (List<Publication>)p.ToList();
         }
 
-
+        public string LoadCumulativeNumber(Researcher researcher)
+        {
+            string cumulative = "";
+            List<Publication> publications = LoadPublicationFor(researcher);
+            for(int i = researcher.UtasStart.Year; i<DateTime.Today.Year +1; i++)
+            {
+                var p = from pub in publications
+                        where pub.Year == i
+                        select pub;
+                List<Publication> Cumulative = (List<Publication>)p.ToList();
+                cumulative += i + ": " + Cumulative.Count +" in total \n";
+            }
+            return cumulative;
+        }
 
         public List<Researcher_Publication> LoadAllRelations()
         {

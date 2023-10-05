@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RAP_WPF.Entity;
+using RAP_WPF.Controller;
+using RAP_WPF.DataSource;
 
 namespace RAP_WPF
 {

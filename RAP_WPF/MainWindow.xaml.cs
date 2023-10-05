@@ -36,11 +36,16 @@ namespace RAP_WPF
 
         }
 
-        private void filtered(object sender, SelectionChangedEventArgs e)
+        private List<Researcher> FilterAndDisplayResults()
         {
-                ComboBoxItem selecteditem = (ComboBoxItem)FilterByLevel.SelectedItem;
+            ComboBoxItem selecteditem = (ComboBoxItem)FilterByLevel.SelectedItem;
+            ResearcherController researcherController = new ResearcherController();
+            List<Researcher> result = new List<Researcher>();
+            if (selecteditem != null)
+            {
                 string selectedcontent = selecteditem.Content.ToString();
                 AllEnum.EmploymentLevel selectedlevel = AllEnum.EmploymentLevel.Student;
+
                 switch (selectedcontent)
                 {
                     case "Level A":
@@ -64,24 +69,49 @@ namespace RAP_WPF
                     default:
                         break;
                 }
-                ResearcherController researcherController = new ResearcherController();
-                List<Researcher> filteredresearchers = researcherController.FilterByLevel(DBAdapter.AllResearchers(), selectedlevel);
-                ResearcherList.ItemsSource = filteredresearchers;
+                List<Researcher> filteredresearchersByLevel = researcherController.FilterByLevel(DBAdapter.AllResearchers(), selectedlevel);
+                if (SearchBox.Text != null)
+                {
+                    string input = SearchBox.Text;
+                    result = researcherController.FilterByName(filteredresearchersByLevel, input);
+                }
+                else
+                {
+                    result = filteredresearchersByLevel;
+                }
+            }
+            else
+            {
+                if (SearchBox.Text != null)
+                {
+                    string input = SearchBox.Text;
+                    result = researcherController.FilterByName(DBAdapter.AllResearchers(), input);
+                }
+                else
+                {
+                    result = DBAdapter.AllResearchers();
+                }
+            }
+            return result;
+            
+        }
 
+        private void filtered(object sender, SelectionChangedEventArgs e)
+        {
+            ResearcherList.ItemsSource = FilterAndDisplayResults();
         }
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            string input = SearchBox.Text;
-            ResearcherController researchercontroller = new ResearcherController();
-            List<Researcher> filteredresearchers = researchercontroller.FilterByName(DBAdapter.AllResearchers(), input);
-            ResearcherList.ItemsSource = filteredresearchers;
+            ResearcherList.ItemsSource = FilterAndDisplayResults();
         }
+
 
         private void Reset(object sender, RoutedEventArgs e)
         {
             ResearcherList.ItemsSource = DBAdapter.AllResearchers();
             SearchBox.Text = "";
+            FilterByLevel.SelectedItem = null;
         }
 
         private void SelectResearcher(object sender, MouseButtonEventArgs e)
@@ -104,6 +134,7 @@ namespace RAP_WPF
                 researcherdetail.Tenure = selectedresearcher.Tenure.ToString("0.00") + " years";
                 researcherdetail.Q1Percentage = selectedresearcher.Q1Percentage.ToString();
                 researcherdetail.ThreeYearAverage = researcherController.ThreeYearAverage(selectedresearcher).ToString();
+                researcherdetail.Cumulative = publicationController.LoadCumulativeNumber(selectedresearcher);
                 if(selectedresearcher is Student)
                 {
                     Student selectedstudent = (Student)selectedresearcher;

@@ -178,5 +178,8 @@
   <ItemGroup>
     <Resource Include="DataSource\Fundings_Rankings.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

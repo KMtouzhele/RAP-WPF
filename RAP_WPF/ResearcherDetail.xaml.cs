@@ -40,15 +40,22 @@ namespace RAP_WPF
         public string PreviousPositions { get; set; }
         public string Supervisor { get; set; }
         public string Degree { get; set; }
+        public string Cumulative { get; set; }
 
-        public ResearcherDetail(Researcher researcher)
+        public List<Publication> OriginPublication(Researcher researcher)
         {
-            InitializeComponent();
             DataContext = this;
             PublicationController publicationController = new PublicationController();
             ResearcherController researcherController = new ResearcherController();
             List<Publication> publications = publicationController.LoadPublicationFor(researcher);
-            PublicationList.ItemsSource = publications;
+            return publications;
+        }
+        public ResearcherDetail(Researcher researcher)
+        {
+            InitializeComponent();
+            DataContext = this;
+            ResearcherController researcherController = new ResearcherController();
+            PublicationList.ItemsSource = OriginPublication(researcher);
             if(researcher is Student)
             {
                 ForStudent.Visibility = Visibility.Visible;
@@ -60,8 +67,6 @@ namespace RAP_WPF
                 PositionLabel.Visibility = Visibility.Visible;
                 Position.Visibility = Visibility.Visible;
             }
-
-
         }
 
         private void SelectPublication(object sender, MouseButtonEventArgs e)
@@ -83,5 +88,47 @@ namespace RAP_WPF
                 
             }
         }
+
+        private void EarlistFirst(object sender, RoutedEventArgs e)
+        {
+            List<Publication> currentItems = (List<Publication>)PublicationList.ItemsSource;
+            if (currentItems != null)
+            {
+                var p = from pub in currentItems
+                        orderby pub.Year, pub.Title descending
+                        select pub;
+                PublicationList.ItemsSource = (List<Publication>)p.ToList();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            List<Publication> currentItems = (List<Publication>)PublicationList.ItemsSource;
+            if (currentItems != null)
+            {
+                var p = from pub in currentItems
+                        orderby pub.Year descending, pub.Title
+                        select pub;
+                PublicationList.ItemsSource = (List<Publication>)p.ToList();
+            }
+        }
+
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            int start = Int32.Parse(Start.Text);
+            int end = Int32.Parse(End.Text);
+            List<Publication> currentItems = (List<Publication>)PublicationList.ItemsSource;
+            var p = from pub in currentItems
+                    where pub.Year >= start && pub.Year <= end
+                    select pub;
+            PublicationList.ItemsSource = (List<Publication>)p.ToList();
+        }
+
+       
+
+        /*private void Reset(object sender, RoutedEventArgs e)
+        {
+            PublicationList.ItemsSource = OriginPublication(researcher);
+        }*/
     }
 }
