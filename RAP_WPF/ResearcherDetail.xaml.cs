@@ -41,20 +41,24 @@ namespace RAP_WPF
         public string Supervisor { get; set; }
         public string Degree { get; set; }
         public string Cumulative { get; set; }
+        public Researcher _researcher { get; set; }
 
 
         public ResearcherDetail(Researcher researcher)
         {
             InitializeComponent();
-            DataContext = researcher;
+            DataContext = this;
+            _researcher = researcher;
             ResearcherController researcherController = new ResearcherController();
             PublicationController publicationController = new PublicationController();
             PublicationList.ItemsSource = publicationController.LoadPublicationFor(researcher);
+
             PhotoSource = new BitmapImage(new Uri(researcher.Photo));
             NameInDetail = researcher.NameShown;
             JobTitle = researcher.JobTitle;
             School = researcher.School;
-
+            
+            //Deal with the "Cradle Coast"
             if (researcher.Campus == AllEnum.Campus.Cradle_Coast)
             {
                 this.Campus = "Cradle Coast";
@@ -72,12 +76,14 @@ namespace RAP_WPF
             ThreeYearAverage = researcherController.ThreeYearAverage(researcher).ToString();
             Cumulative = publicationController.LoadCumulativeNumber(researcher);
 
+            //Student page visibility and info
             if (researcher is Student)
             {
                 Student selectedstudent = (Student)researcher;
                 Supervisor = researcherController.LoadSupervisor(selectedstudent);
                 ForStudent.Visibility = Visibility.Visible;
             }
+            //Staff page visibility and info
             else
             {
                 Staff selectedstaff = (Staff)researcher;
@@ -92,6 +98,7 @@ namespace RAP_WPF
             }
         }
 
+        //Open a new Window to show publication details
         private void SelectPublication(object sender, MouseButtonEventArgs e)
         {
             Publication selectedpublication = (Publication)PublicationList.SelectedItem;
@@ -103,6 +110,7 @@ namespace RAP_WPF
             }
         }
 
+        //Function that Invert the publication list
         private void EarlistFirst(object sender, RoutedEventArgs e)
         {
             List<Publication> currentItems = (List<Publication>)PublicationList.ItemsSource;
@@ -115,7 +123,8 @@ namespace RAP_WPF
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //Function that Invert the publication list again
+        private void LatestFirst(object sender, RoutedEventArgs e)
         {
             List<Publication> currentItems = (List<Publication>)PublicationList.ItemsSource;
             if (currentItems != null)
@@ -127,6 +136,7 @@ namespace RAP_WPF
             }
         }
 
+        //Function that filter publication list based on the input year range
         private void Search(object sender, RoutedEventArgs e)
         {
             if (!int.TryParse(Start.Text, out int start) || !int.TryParse(End.Text, out int end))
@@ -146,6 +156,7 @@ namespace RAP_WPF
             }
         }
 
+        //Function that reset the publication list as new
         private void Reset(object sender, RoutedEventArgs e)
         {
             Start.Text = "";
@@ -155,10 +166,10 @@ namespace RAP_WPF
 
         public void ReloadPublications()
         {
-            if (DataContext is Researcher researcher)
+            if (_researcher != null)
             {
                 PublicationController publicationController = new PublicationController();
-                PublicationList.ItemsSource = publicationController.LoadPublicationFor(researcher);
+                PublicationList.ItemsSource = publicationController.LoadPublicationFor(_researcher);
             }
         }
     }

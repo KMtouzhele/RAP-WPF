@@ -105,7 +105,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Content="Show the LATEST first"  Margin="0,0,5,0" Click="Button_Click"/>
+                                <Button Grid.Column="0" Content="Show the LATEST first"  Margin="0,0,5,0" Click="LatestFirst"/>
                                 <Button Grid.Column="1" Content="Show the EARLIST first" Click="EarlistFirst" Margin="5,0,0,0"/>
                             </Grid>
                             <DataGrid AutoGenerateColumns="False" Name="PublicationList" CanUserAddRows="False" MouseDoubleClick="SelectPublication">
