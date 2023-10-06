@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RAP_WPF.DataSource;
 using RAP_WPF.Controller;
 using System.Diagnostics;
 
@@ -25,16 +24,7 @@ namespace RAP_WPF.Entity
         public DateTime CurrentStart { get; set; }
         public string NameShown { get; set; }
         public string JobTitle{ get; set; }
-        /*public string JobTitle
-        {
-            get
-            {
-                Position position = new Position();
-                return position.GetToTitle(Level);
-            }
-        }*/
 
-        
 
         public float Tenure
         {
@@ -49,8 +39,7 @@ namespace RAP_WPF.Entity
         {
             get
             {
-                PublicationController publicationcontroller = new PublicationController();
-                List<Publication> publications = publicationcontroller.LoadPubCountFor(GivenName, FamilyName, DBAdapter.AllPublications());
+                List<Publication> publications = PublicationController.LoadPubCountFor(GivenName, FamilyName);
                 int count = publications.Count;
                 var q1 = from pub in publications
                          where pub.Ranking == AllEnum.OutputRanking.Q1

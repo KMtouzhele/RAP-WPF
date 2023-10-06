@@ -49,9 +49,7 @@ namespace RAP_WPF
             InitializeComponent();
             DataContext = this;
             _researcher = researcher;
-            ResearcherController researcherController = new ResearcherController();
-            PublicationController publicationController = new PublicationController();
-            PublicationList.ItemsSource = publicationController.LoadPublicationFor(researcher);
+            PublicationList.ItemsSource = PublicationController.LoadPublicationFor(researcher);
 
             PhotoSource = new BitmapImage(new Uri(researcher.Photo));
             NameInDetail = researcher.NameShown;
@@ -67,20 +65,19 @@ namespace RAP_WPF
             {
                 this.Campus = researcher.Campus.ToString();
             }
-
             Email = researcher.Email;
             UtasStart = researcher.UtasStart.ToString("yyyy-MM-dd");
             CurrentStart = researcher.CurrentStart.ToString("yyyy-MM-dd");
             Tenure = researcher.Tenure.ToString("0.00") + " years";
             Q1Percentage = researcher.Q1Percentage.ToString();
-            ThreeYearAverage = researcherController.ThreeYearAverage(researcher).ToString();
-            Cumulative = publicationController.LoadCumulativeNumber(researcher);
+            ThreeYearAverage = ResearcherController.ThreeYearAverage(researcher).ToString();
+            Cumulative = PublicationController.LoadCumulativeNumber(researcher);
 
             //Student page visibility and info
             if (researcher is Student)
             {
                 Student selectedstudent = (Student)researcher;
-                Supervisor = researcherController.LoadSupervisor(selectedstudent);
+                Supervisor = ResearcherController.LoadSupervisor(selectedstudent);
                 ForStudent.Visibility = Visibility.Visible;
             }
             //Staff page visibility and info
@@ -88,10 +85,10 @@ namespace RAP_WPF
             {
                 Staff selectedstaff = (Staff)researcher;
                 PerformanceByPublications = selectedstaff.PerformanceByPublicaton.ToString("0") + " publications per year";
-                PerformanceByFunding = publicationController.FundingPerformance(researcher).ToString("0,000") + " AUD/year";
-                PreviousPositions = researcherController.LoadPreviousPosition(researcher);
-                SupervisionNumber = researcherController.CalculateSupervision(selectedstaff).ToString();
-                StudentNames = researcherController.LoadSupervision(selectedstaff);
+                PerformanceByFunding = PublicationController.FundingPerformance(researcher).ToString("0,000") + " AUD/year";
+                PreviousPositions = ResearcherController.LoadPreviousPosition(researcher);
+                SupervisionNumber = ResearcherController.CalculateSupervision(selectedstaff).ToString();
+                StudentNames = ResearcherController.LoadSupervision(selectedstaff);
                 ForStaff.Visibility = Visibility.Visible;
                 PositionLabel.Visibility = Visibility.Visible;
                 Position.Visibility = Visibility.Visible;
@@ -168,8 +165,7 @@ namespace RAP_WPF
         {
             if (_researcher != null)
             {
-                PublicationController publicationController = new PublicationController();
-                PublicationList.ItemsSource = publicationController.LoadPublicationFor(_researcher);
+                PublicationList.ItemsSource = PublicationController.LoadPublicationFor(_researcher);
             }
         }
     }

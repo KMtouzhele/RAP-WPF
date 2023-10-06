@@ -30,8 +30,7 @@ namespace RAP_WPF.Entity
         {
             get
             {
-                ResearcherController researcherController = new ResearcherController();
-                double threeyearaverage = researcherController.ThreeYearAverage(this);
+                double threeyearaverage = ResearcherController.ThreeYearAverage(this);
                 return threeyearaverage;
             }
         }
@@ -40,8 +39,7 @@ namespace RAP_WPF.Entity
         {
             get
             {
-                PublicationController publicationcontroller = new PublicationController();
-                List<Publication> publications = publicationcontroller.LoadPubSinceCommence(this, DBAdapter.AllPublications());
+                List<Publication> publications = PublicationController.LoadPubSinceCommence(this);
                 float performancebypublication = publications.Count / Tenure;
                 return performancebypublication;
             }
@@ -50,8 +48,7 @@ namespace RAP_WPF.Entity
         {
             get
             {
-                ResearcherController researcherController = new ResearcherController();
-                double performance = researcherController.Performance(this);
+                double performance = ResearcherController.Performance(this);
                 return performance;
             }
         }

@@ -11,12 +11,12 @@ namespace RAP_WPF.Controller
 {
     public class ResearcherController
     {
-        public List<Researcher> LoadAllResearchers()
+        public static List<Researcher> LoadAllResearchers()
         {
             return DBAdapter.AllResearchers();
         }
 
-        public List<Researcher> FilterByLevel(List<Researcher> researchers, AllEnum.EmploymentLevel level)
+        public static List<Researcher> FilterByLevel(List<Researcher> researchers, AllEnum.EmploymentLevel level)
         {
             var r = from researcher in researchers
                     where researcher.Level == level
@@ -24,7 +24,7 @@ namespace RAP_WPF.Controller
             return (List<Researcher>)r.ToList();
         }
 
-        public List<Researcher> FilterByName(List<Researcher> researchers, string input)
+        public static List<Researcher> FilterByName(List<Researcher> researchers, string input)
         {
             string lowerinput = input.ToLower();
             var r = from researcher in researchers
@@ -33,17 +33,9 @@ namespace RAP_WPF.Controller
             return (List<Researcher>)r.ToList();
         }
 
-        public List<Researcher> LoadResearcherDetials(List<Researcher> researchers, Researcher researcher)
+        public static string LoadSupervision(Staff staff)
         {
-            var r = from researcher1 in researchers
-                    where researcher1.Id == researcher.Id
-                    select researcher1;
-            return (List<Researcher>)r.ToList();
-        }
-
-        public string LoadSupervision(Staff staff)
-        {
-            List<Student> students = DBAdapter.AllResearchers().OfType<Student>().ToList();
+            List<Student> students = LoadAllResearchers().OfType<Student>().ToList();
             var s = from student in students
                     where student.Supervisor == staff.Id
                     select student;
@@ -59,9 +51,9 @@ namespace RAP_WPF.Controller
             else supervisionnames = "No supervisions found.";
             return supervisionnames;
         }
-        public int CalculateSupervision(Staff staff)
+        public static int CalculateSupervision(Staff staff)
         {
-            List<Student> students = DBAdapter.AllResearchers().OfType<Student>().ToList();
+            List<Student> students = LoadAllResearchers().OfType<Student>().ToList();
             var s = from student in students
                     where student.Supervisor == staff.Id
                     select student;
@@ -69,9 +61,9 @@ namespace RAP_WPF.Controller
             return supervisions.Count;
         }
 
-        public double ThreeYearAverage(Researcher researcher)
+        public static double ThreeYearAverage(Researcher researcher)
         {
-            List<Publication> publications = DBAdapter.AllPublications();
+            List<Publication> publications = PublicationController.LoadAllPublications();
 
             var selectedpub = from pub in publications
                               where pub.Author.Contains(researcher.GivenName + " " + researcher.FamilyName)
@@ -80,7 +72,7 @@ namespace RAP_WPF.Controller
             List<Publication> selectedpublications = (List<Publication>)selectedpub.ToList();
             return (double)selectedpublications.Count / 3;
         }
-        public double Performance(Staff researcher)
+        public static double Performance(Staff researcher)
         {
             double expectednumber = 1;
             switch (researcher.Level)
@@ -109,9 +101,9 @@ namespace RAP_WPF.Controller
         }
 
         //To load the researcher list based on the calculated performance
-        public List<StaffByPerformance> LoadResearcherByPerformance(double bottom, double cap)
+        public static List<StaffByPerformance> LoadResearcherByPerformance(double bottom, double cap)
         {
-            List<Staff> staff = DBAdapter.AllResearchers().OfType<Staff>().ToList();
+            List<Staff> staff = LoadAllResearchers().OfType<Staff>().ToList();
             var r = from researcher in staff
                     where researcher.Performance >= bottom && researcher.Performance <= cap
                     orderby researcher.Performance
@@ -125,7 +117,7 @@ namespace RAP_WPF.Controller
         }
 
         //To load previous positions
-        public string LoadPreviousPosition(Researcher researcher)
+        public static string LoadPreviousPosition(Researcher researcher)
         {
             Debug.WriteLine("Loading positions...");
             List<Position> AllPosition = DBAdapter.AllPosition();
@@ -153,9 +145,9 @@ namespace RAP_WPF.Controller
             return positions;
         }
         
-        public string LoadSupervisor(Student researcher)
+        public static string LoadSupervisor(Student researcher)
         {
-            List<Researcher> AllResearcher = DBAdapter.AllResearchers();
+            List<Researcher> AllResearcher = LoadAllResearchers();
             var s = from supervisor in AllResearcher
                     where researcher.Supervisor == supervisor.Id
                     select supervisor;

@@ -26,25 +26,24 @@ namespace RAP_WPF
         public MainWindow()
         {
             InitializeComponent();
-            ResearcherController researcherController = new ResearcherController();
             List<Researcher> researchers = DBAdapter.AllResearchers();
             ResearcherList.ItemsSource = researchers;
             
             //Poor report
-            Poor.ItemsSource = researcherController.LoadResearcherByPerformance(0, 0.7);
+            Poor.ItemsSource = ResearcherController.LoadResearcherByPerformance(0, 0.7);
 
             //Below expectations report
-            BelowExpectations.ItemsSource = researcherController.LoadResearcherByPerformance(0.7, 1.1);
+            BelowExpectations.ItemsSource = ResearcherController.LoadResearcherByPerformance(0.7, 1.1);
 
             //Meeting Minimun report
-            var meetingminimun = researcherController.LoadResearcherByPerformance(1.1, 2);
+            var meetingminimun = ResearcherController.LoadResearcherByPerformance(1.1, 2);
             var r3 = from researcher in meetingminimun
                     orderby researcher.Performance descending
                     select researcher;
             MeetingMinimum.ItemsSource = r3.ToList();
             
             //Star performance report
-            var starperformancer = researcherController.LoadResearcherByPerformance(2, 999);
+            var starperformancer = ResearcherController.LoadResearcherByPerformance(2, 999);
             var r4 = from researcher in starperformancer
                     orderby researcher.Performance descending
                     select researcher;
@@ -86,11 +85,11 @@ namespace RAP_WPF
                     default:
                         break;
                 }
-                List<Researcher> filteredresearchersByLevel = researcherController.FilterByLevel(DBAdapter.AllResearchers(), selectedlevel);
+                List<Researcher> filteredresearchersByLevel = ResearcherController.FilterByLevel(DBAdapter.AllResearchers(), selectedlevel);
                 if (SearchBox.Text != null)
                 {
                     string input = SearchBox.Text;
-                    result = researcherController.FilterByName(filteredresearchersByLevel, input);
+                    result = ResearcherController.FilterByName(filteredresearchersByLevel, input);
                 }
                 else
                 {
@@ -102,7 +101,7 @@ namespace RAP_WPF
                 if (SearchBox.Text != null)
                 {
                     string input = SearchBox.Text;
-                    result = researcherController.FilterByName(DBAdapter.AllResearchers(), input);
+                    result = ResearcherController.FilterByName(DBAdapter.AllResearchers(), input);
                 }
                 else
                 {

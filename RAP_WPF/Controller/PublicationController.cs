@@ -12,22 +12,19 @@ namespace RAP_WPF.Controller
     class PublicationController
     {
 
-        public List<Researcher_Publication> LoadDOIsFor(int id, List<Researcher_Publication> relations)
-        {
-            var rp = from relation in relations
-                     where relation.Id == id
-                     select relation;
-
-            return (List<Researcher_Publication>)rp.ToList();
-        }
-
-        public List<Publication> LoadAllPublications()
+        public static List<Publication> LoadAllPublications()
         {
             return DBAdapter.AllPublications();
         }
 
-        public List<Publication> LoadPubCountFor(string givenname, string familyname, List<Publication> publications)
+        public static List<Researcher_Publication> LoadAllRelations()
         {
+            return DBAdapter.Relation();
+        }
+
+        public static List<Publication> LoadPubCountFor(string givenname, string familyname)
+        {
+            List<Publication> publications = PublicationController.LoadAllPublications();
             string name = givenname + " " + familyname;
             var selectedpub = from pub in publications
                               where pub.Author.Contains(name)
@@ -36,16 +33,16 @@ namespace RAP_WPF.Controller
         }
 
 
-
-        public List<Publication> LoadPubSinceCommence(Researcher researcher, List<Publication> publications)
+        public static List<Publication> LoadPubSinceCommence(Researcher researcher)
         {
-            var selectedpub = from pub in publications
+
+            List<Publication> publications = PublicationController.LoadAllPublications(); var selectedpub = from pub in publications
                               where pub.Available >= researcher.UtasStart
                               select pub;
             return (List<Publication>)selectedpub.ToList();
         }
 
-        public float FundingPerformance(Researcher researcher)
+        public static float FundingPerformance(Researcher researcher)
         {
 
             List<Publication> pubFunding = XmlAdapter.LoadAll();
@@ -54,7 +51,6 @@ namespace RAP_WPF.Controller
                             where pub.Year >= researcher.UtasStart.Year
                             select pub;
 
-
             float totalFunding = validpub.Sum(pub => pub.Funding);
             float performancebyfunding = totalFunding / researcher.Tenure;
             return performancebyfunding;
@@ -62,10 +58,10 @@ namespace RAP_WPF.Controller
         }
 
         //To load publications by specific researcher
-        public List<Publication> LoadPublicationFor(Researcher researcher)
+        public static List<Publication> LoadPublicationFor(Researcher researcher)
         {
-            List<Publication> AllPub = DBAdapter.AllPublications();
-            List<Researcher_Publication> AllResearcherPublication = DBAdapter.Relation();
+            List<Publication> AllPub = LoadAllPublications();
+            List<Researcher_Publication> AllResearcherPublication = LoadAllRelations();
             var relation = from r_p in AllResearcherPublication
                            where researcher.Id == r_p.Id
                            select r_p;
@@ -80,7 +76,7 @@ namespace RAP_WPF.Controller
             return (List<Publication>)p.ToList();
         }
 
-        public string LoadCumulativeNumber(Researcher researcher)
+        public static string LoadCumulativeNumber(Researcher researcher)
         {
             string cumulative = "";
             List<Publication> publications = LoadPublicationFor(researcher);
@@ -95,9 +91,6 @@ namespace RAP_WPF.Controller
             return cumulative;
         }
 
-        public List<Researcher_Publication> LoadAllRelations()
-        {
-            return DBAdapter.Relation();
-        }
+        
     }
 }
