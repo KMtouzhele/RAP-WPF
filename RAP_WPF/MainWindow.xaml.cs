@@ -29,10 +29,19 @@ namespace RAP_WPF
             ResearcherController researcherController = new ResearcherController();
             List<Researcher> researchers = DBAdapter.AllResearchers();
             ResearcherList.ItemsSource = researchers;
-            Poor.ItemsSource = researcherController.LoadResearcherByPerformance(-999, 0.7);
+            Poor.ItemsSource = researcherController.LoadResearcherByPerformance(0, 0.7);
             BelowExpectations.ItemsSource = researcherController.LoadResearcherByPerformance(0.7, 1.1);
-            MeetingMinimum.ItemsSource = researcherController.LoadResearcherByPerformance(1.1, 2);
-            StarPerformancer.ItemsSource = researcherController.LoadResearcherByPerformance(2, 999);
+            var meetingminimun = researcherController.LoadResearcherByPerformance(1.1, 2);
+            var r3 = from researcher in meetingminimun
+                    orderby researcher.Performance descending
+                    select researcher;
+            MeetingMinimum.ItemsSource = r3.ToList();
+
+            var starperformancer = researcherController.LoadResearcherByPerformance(2, 999);
+            var r4 = from researcher in starperformancer
+                    orderby researcher.Performance descending
+                    select researcher;
+            StarPerformancer.ItemsSource = r4.ToList();
 
         }
 

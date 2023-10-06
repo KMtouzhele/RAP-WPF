@@ -78,11 +78,11 @@ namespace RAP_WPF.Controller
                               where pub.Year >= DateTime.Today.Year - 3
                               select pub;
             List<Publication> selectedpublications = (List<Publication>)selectedpub.ToList();
-            return selectedpublications.Count / 3;
+            return (double)selectedpublications.Count / 3;
         }
         public double Performance(Staff researcher)
         {
-            double expectednumber = -1;
+            double expectednumber = 1;
             switch (researcher.Level)
             {
                 case AllEnum.EmploymentLevel.A:
@@ -114,6 +114,7 @@ namespace RAP_WPF.Controller
             List<Staff> staff = DBAdapter.AllResearchers().OfType<Staff>().ToList();
             var r = from researcher in staff
                     where researcher.Performance >= bottom && researcher.Performance <= cap
+                    orderby researcher.Performance
                     select new StaffByPerformance
                     {
                         Name = researcher.NameShown.ToString(),

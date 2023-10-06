@@ -62,8 +62,8 @@
                                     <StackPanel>
                                         <DataGrid Name="Poor" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                                             <DataGrid.Columns >
-                                                <DataGridTextColumn Width="*" Header="Performance" Binding='{Binding ThreeYearAverage}'/>
-                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding NameShown}'/>
+                                                <DataGridTextColumn Width="*" Header="Performance" Binding='{Binding Performance}'/>
+                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding Name}'/>
                                                 <DataGridTextColumn Width="*" Header="Email" Binding='{Binding Email}'/>
                                             </DataGrid.Columns>
                                         </DataGrid>
@@ -75,7 +75,7 @@
                                         <DataGrid Name="BelowExpectations" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="*" Header="Performance" Binding='{Binding Performance}'/>
-                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding NameShown}'/>
+                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding Name}'/>
                                                 <DataGridTextColumn Width="*" Header="Email" Binding='{Binding Email}'/>
                                             </DataGrid.Columns>
                                         </DataGrid>
@@ -87,7 +87,7 @@
                                         <DataGrid Name="MeetingMinimum" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="*" Header="Performance" Binding='{Binding Performance}'/>
-                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding NameShown}'/>
+                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding Name}'/>
                                                 <DataGridTextColumn Width="*" Header="Email" Binding='{Binding Email}'/>
                                             </DataGrid.Columns>
                                         </DataGrid>
