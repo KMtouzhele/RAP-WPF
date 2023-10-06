@@ -126,9 +126,10 @@ namespace RAP_WPF
 
        
 
-        /*private void Reset(object sender, RoutedEventArgs e)
+        private void Reset(object sender, RoutedEventArgs e)
         {
-            PublicationList.ItemsSource = OriginPublication(researcher);
-        }*/
+            Start.Text = "";
+            End.Text = "";
+        }
     }
 }

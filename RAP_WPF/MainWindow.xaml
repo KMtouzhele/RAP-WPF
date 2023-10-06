@@ -57,7 +57,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <Grid  Name="ReportGrid" Visibility="Collapsed" Height="330">
-                            <TabControl>
+                            <TabControl Name="Report">
                                 <TabItem Header="Poor">
                                     <StackPanel>
                                         <DataGrid Name="Poor" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
@@ -67,43 +67,43 @@
                                                 <DataGridTextColumn Width="*" Header="Email" Binding='{Binding Email}'/>
                                             </DataGrid.Columns>
                                         </DataGrid>
-                                        <Button Content="Copy Emails"/>
+                                        <Button Content="Copy Emails" Click="CopyEmails"/>
                                     </StackPanel>
                                 </TabItem>
                                 <TabItem Header="Below Expectations" >
                                     <StackPanel>
-                                        <DataGrid Name="BelowExpectations" AutoGenerateColumns="False" CanUserAddRows="False">
+                                        <DataGrid Name="BelowExpectations" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="*" Header="Performance" Binding='{Binding Performance}'/>
                                                 <DataGridTextColumn Width="*" Header="Name" Binding='{Binding NameShown}'/>
                                                 <DataGridTextColumn Width="*" Header="Email" Binding='{Binding Email}'/>
                                             </DataGrid.Columns>
                                         </DataGrid>
-                                        <Button Content="Copy Emails"/>
+                                        <Button Content="Copy Emails" Click="CopyEmails"/>
                                     </StackPanel>
                                 </TabItem>
                                 <TabItem Header="Meeting Minimum" >
                                     <StackPanel>
-                                        <DataGrid Name="MeetingMinimum" AutoGenerateColumns="False" CanUserAddRows="False">
+                                        <DataGrid Name="MeetingMinimum" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="*" Header="Performance" Binding='{Binding Performance}'/>
                                                 <DataGridTextColumn Width="*" Header="Name" Binding='{Binding NameShown}'/>
                                                 <DataGridTextColumn Width="*" Header="Email" Binding='{Binding Email}'/>
                                             </DataGrid.Columns>
                                         </DataGrid>
-                                        <Button Content="Copy Emails"/>
+                                        <Button Content="Copy Emails" Click="CopyEmails"/>
                                     </StackPanel>
                                 </TabItem>
                                 <TabItem Header="Star Performers">
                                     <StackPanel>
-                                        <DataGrid Name="StarPerformancer" AutoGenerateColumns="False" CanUserAddRows="False">
+                                        <DataGrid Name="StarPerformancer" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="*" Header="Performance" Binding='{Binding Performance}'/>
-                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding NameShown}'/>
+                                                <DataGridTextColumn Width="*" Header="Name" Binding='{Binding Name}'/>
                                                 <DataGridTextColumn Width="*" Header="Email" Binding='{Binding Email}'/>
                                             </DataGrid.Columns>
                                         </DataGrid>
-                                        <Button Content="Copy Emails"/>
+                                        <Button Content="Copy Emails" Click="CopyEmails"/>
                                     </StackPanel>
                                 </TabItem>
                             </TabControl>

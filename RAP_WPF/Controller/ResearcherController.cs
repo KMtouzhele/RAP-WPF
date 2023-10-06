@@ -109,14 +109,18 @@ namespace RAP_WPF.Controller
         }
 
         //To load the researcher list based on the calculated performance
-        public List<Staff> LoadResearcherByPerformance(double bottom, double cap)
+        public List<StaffByPerformance> LoadResearcherByPerformance(double bottom, double cap)
         {
             List<Staff> staff = DBAdapter.AllResearchers().OfType<Staff>().ToList();
             var r = from researcher in staff
                     where researcher.Performance >= bottom && researcher.Performance <= cap
-                    select researcher;
-            return (List<Staff>)r.ToList();
-
+                    select new StaffByPerformance
+                    {
+                        Name = researcher.NameShown.ToString(),
+                        Email = researcher.Email.ToString(),
+                        Performance = researcher.Performance.ToString("P") 
+                    };
+            return (List<StaffByPerformance>)r.ToList();
         }
 
         //To load previous positions
@@ -162,6 +166,13 @@ namespace RAP_WPF.Controller
             }
             return supervisorname;
 
+        }
+
+        public class StaffByPerformance
+        {
+            public string Name { get; set; }
+            public string Performance { get; set; }
+            public string Email { get; set; }
         }
     }
 }

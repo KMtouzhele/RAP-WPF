@@ -127,7 +127,14 @@ namespace RAP_WPF
                 researcherdetail.NameInDetail = selectedresearcher.NameShown;
                 researcherdetail.JobTitle = selectedresearcher.JobTitle;
                 researcherdetail.School = selectedresearcher.School;
-                researcherdetail.Campus = selectedresearcher.Campus.ToString();
+                if (selectedresearcher.Campus == AllEnum.Campus.Cradle_Coast)
+                {
+                    researcherdetail.Campus = "Cradle Coast";
+                }
+                else
+                {
+                    researcherdetail.Campus = selectedresearcher.Campus.ToString();
+                }
                 researcherdetail.Email = selectedresearcher.Email;
                 researcherdetail.UtasStart = selectedresearcher.UtasStart.ToString("yyyy-MM-dd");
                 researcherdetail.CurrentStart = selectedresearcher.CurrentStart.ToString("yyyy-MM-dd");
@@ -166,6 +173,40 @@ namespace RAP_WPF
             Controller.Visibility = Visibility.Visible;
 
             ReportGrid.Visibility = Visibility.Collapsed;
+        }
+        private void CopyEmails(object sender, RoutedEventArgs e)
+        {
+            DataGrid activeDataGrid = null;
+            TabItem selectedTab = (TabItem)Report.SelectedItem;
+            switch (selectedTab.Header.ToString())
+            {
+                case "Poor":
+                    activeDataGrid = Poor;
+                    break;
+                case "Below Expectations":
+                    activeDataGrid = BelowExpectations;
+                    break;
+                case "Meeting Minimum":
+                    activeDataGrid = MeetingMinimum;
+                    break;
+                case "Star Performers":
+                    activeDataGrid = StarPerformancer;
+                    break;
+                default:
+                    break;
+            }
+
+            if (activeDataGrid != null)
+            {
+                string clipboard="";
+                foreach (var item in activeDataGrid.Items)
+                {
+                    string email = (activeDataGrid.Columns[2].GetCellContent(item) as TextBlock)?.Text;
+                    clipboard += email + "; ";
+                }
+                Clipboard.SetText(clipboard);
+                MessageBox.Show("Emails copied to clipboard.");
+            }
         }
     }
 }

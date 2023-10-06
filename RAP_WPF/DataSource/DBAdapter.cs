@@ -105,7 +105,12 @@ namespace RAP_WPF.DataSource
                     researcher.NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")";
                     researcher.Title = ParseEnum<AllEnum.Title>(rdr.GetString(4));
                     researcher.School = rdr.GetString(5);
-                    //researcher.Campus = ParseEnum<AllEnum.Campus>(rdr.GetString(6)),
+                    string campus = rdr.GetString(6);
+                    if ( campus == "Cradle Coast")
+                    {
+                        campus = "Cradle_Coast";
+                    }
+                    researcher.Campus = ParseEnum<AllEnum.Campus>(campus);
                     researcher.Email = rdr.GetString(7);
                     researcher.Photo = rdr.GetString(8);
                     researcher.Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11));
@@ -126,7 +131,7 @@ namespace RAP_WPF.DataSource
                         student.NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")";
                         student.Title = ParseEnum<AllEnum.Title>(rdr.GetString(4));
                         student.School = rdr.GetString(5);
-
+                        student.Campus = ParseEnum<AllEnum.Campus>(campus);
                         student.Email = rdr.GetString(7);
                         student.Photo = rdr.GetString(8);
                         student.Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11));
@@ -149,7 +154,7 @@ namespace RAP_WPF.DataSource
                         staff.NameShown = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(4) + ")";
                         staff.Title = ParseEnum<AllEnum.Title>(rdr.GetString(4));
                         staff.School = rdr.GetString(5);
-
+                        staff.Campus = ParseEnum<AllEnum.Campus>(campus);
                         staff.Email = rdr.GetString(7);
                         staff.Photo = rdr.GetString(8);
                         staff.Level = ParseEnum<AllEnum.EmploymentLevel>(rdr.GetString(11));
