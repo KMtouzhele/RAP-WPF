@@ -35,6 +35,14 @@ namespace RAP_WPF
         {
             InitializeComponent();
             DataContext = this;
+            DOI = publication.DOI;
+            Authors = publication.Author;
+            Ranking = publication.Ranking.ToString();
+            Type = publication.Type.ToString();
+            CiteAs = publication.CiteAs;
+            Year = publication.Year.ToString();
+            Available = publication.Available.ToString("yyyy-MM-dd");
+            Age = publication.Age.ToString("0,000") + " days";
         }
     }
 }

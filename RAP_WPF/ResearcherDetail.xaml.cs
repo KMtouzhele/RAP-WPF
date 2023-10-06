@@ -42,27 +42,50 @@ namespace RAP_WPF
         public string Degree { get; set; }
         public string Cumulative { get; set; }
 
-        public List<Publication> OriginPublication(Researcher researcher)
-        {
-            DataContext = this;
-            PublicationController publicationController = new PublicationController();
-            ResearcherController researcherController = new ResearcherController();
-            List<Publication> publications = publicationController.LoadPublicationFor(researcher);
-            return publications;
-        }
+
         public ResearcherDetail(Researcher researcher)
         {
             InitializeComponent();
-            DataContext = this;
+            DataContext = researcher;
             ResearcherController researcherController = new ResearcherController();
-            PublicationList.ItemsSource = OriginPublication(researcher);
-            if(researcher is Student)
-            {
-                ForStudent.Visibility = Visibility.Visible;
+            PublicationController publicationController = new PublicationController();
+            PublicationList.ItemsSource = publicationController.LoadPublicationFor(researcher);
+            PhotoSource = new BitmapImage(new Uri(researcher.Photo));
+            NameInDetail = researcher.NameShown;
+            JobTitle = researcher.JobTitle;
+            School = researcher.School;
 
+            if (researcher.Campus == AllEnum.Campus.Cradle_Coast)
+            {
+                this.Campus = "Cradle Coast";
             }
             else
             {
+                this.Campus = researcher.Campus.ToString();
+            }
+
+            Email = researcher.Email;
+            UtasStart = researcher.UtasStart.ToString("yyyy-MM-dd");
+            CurrentStart = researcher.CurrentStart.ToString("yyyy-MM-dd");
+            Tenure = researcher.Tenure.ToString("0.00") + " years";
+            Q1Percentage = researcher.Q1Percentage.ToString();
+            ThreeYearAverage = researcherController.ThreeYearAverage(researcher).ToString();
+            Cumulative = publicationController.LoadCumulativeNumber(researcher);
+
+            if (researcher is Student)
+            {
+                Student selectedstudent = (Student)researcher;
+                Supervisor = researcherController.LoadSupervisor(selectedstudent);
+                ForStudent.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Staff selectedstaff = (Staff)researcher;
+                PerformanceByPublications = selectedstaff.PerformanceByPublicaton.ToString("0") + " publications per year";
+                PerformanceByFunding = publicationController.FundingPerformance(researcher).ToString("0,000") + " AUD/year";
+                PreviousPositions = researcherController.LoadPreviousPosition(researcher);
+                SupervisionNumber = researcherController.CalculateSupervision(selectedstaff).ToString();
+                StudentNames = researcherController.LoadSupervision(selectedstaff);
                 ForStaff.Visibility = Visibility.Visible;
                 PositionLabel.Visibility = Visibility.Visible;
                 Position.Visibility = Visibility.Visible;
@@ -76,16 +99,7 @@ namespace RAP_WPF
             if (selectedpublication != null)
             {
                 PublicationDetail publicationDetail = new PublicationDetail(selectedpublication);
-                publicationDetail.DOI = selectedpublication.DOI;
-                publicationDetail.Authors = selectedpublication.Author;
-                publicationDetail.Ranking = selectedpublication.Ranking.ToString();
-                publicationDetail.Type = selectedpublication.Type.ToString();
-                publicationDetail.CiteAs = selectedpublication.CiteAs;
-                publicationDetail.Year = selectedpublication.Year.ToString();
-                publicationDetail.Available = selectedpublication.Available.ToString("yyyy-MM-dd");
-                publicationDetail.Age = selectedpublication.Age.ToString("0,000")+ " days";
                 publicationDetail.Show();
-                
             }
         }
 
@@ -115,21 +129,37 @@ namespace RAP_WPF
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            int start = Int32.Parse(Start.Text);
-            int end = Int32.Parse(End.Text);
-            List<Publication> currentItems = (List<Publication>)PublicationList.ItemsSource;
-            var p = from pub in currentItems
-                    where pub.Year >= start && pub.Year <= end
-                    select pub;
-            PublicationList.ItemsSource = (List<Publication>)p.ToList();
+            if (!int.TryParse(Start.Text, out int start) || !int.TryParse(End.Text, out int end))
+            {
+                MessageBox.Show("Please enter 4-digit years in both Start and End fields.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                int startyear = Int32.Parse(Start.Text);
+                int endyear = Int32.Parse(End.Text);
+                List<Publication> currentItems = (List<Publication>)PublicationList.ItemsSource;
+                var p = from pub in currentItems
+                        where pub.Year >= startyear && pub.Year <= endyear
+                        select pub;
+                PublicationList.ItemsSource = (List<Publication>)p.ToList();
+            }
         }
-
-       
 
         private void Reset(object sender, RoutedEventArgs e)
         {
             Start.Text = "";
             End.Text = "";
+            ReloadPublications();
+        }
+
+        public void ReloadPublications()
+        {
+            if (DataContext is Researcher researcher)
+            {
+                PublicationController publicationController = new PublicationController();
+                PublicationList.ItemsSource = publicationController.LoadPublicationFor(researcher);
+            }
         }
     }
 }

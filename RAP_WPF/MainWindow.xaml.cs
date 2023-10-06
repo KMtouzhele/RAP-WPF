@@ -132,38 +132,6 @@ namespace RAP_WPF
             if (selectedresearcher != null)
             {
                 ResearcherDetail researcherdetail = new ResearcherDetail(selectedresearcher);
-                researcherdetail.PhotoSource = new BitmapImage(new Uri(selectedresearcher.Photo));
-                researcherdetail.NameInDetail = selectedresearcher.NameShown;
-                researcherdetail.JobTitle = selectedresearcher.JobTitle;
-                researcherdetail.School = selectedresearcher.School;
-                if (selectedresearcher.Campus == AllEnum.Campus.Cradle_Coast)
-                {
-                    researcherdetail.Campus = "Cradle Coast";
-                }
-                else
-                {
-                    researcherdetail.Campus = selectedresearcher.Campus.ToString();
-                }
-                researcherdetail.Email = selectedresearcher.Email;
-                researcherdetail.UtasStart = selectedresearcher.UtasStart.ToString("yyyy-MM-dd");
-                researcherdetail.CurrentStart = selectedresearcher.CurrentStart.ToString("yyyy-MM-dd");
-                researcherdetail.Tenure = selectedresearcher.Tenure.ToString("0.00") + " years";
-                researcherdetail.Q1Percentage = selectedresearcher.Q1Percentage.ToString();
-                researcherdetail.ThreeYearAverage = researcherController.ThreeYearAverage(selectedresearcher).ToString();
-                researcherdetail.Cumulative = publicationController.LoadCumulativeNumber(selectedresearcher);
-                if(selectedresearcher is Student)
-                {
-                    Student selectedstudent = (Student)selectedresearcher;
-                    researcherdetail.Supervisor = researcherController.LoadSupervisor(selectedstudent);
-                }
-                else
-                {
-                    Staff selectedstaff = (Staff)selectedresearcher;
-                    researcherdetail.PerformanceByPublications = selectedstaff.PerformanceByPublicaton.ToString("0") + " publications per year";
-                    researcherdetail.PerformanceByFunding = publicationController.FundingPerformance(selectedresearcher).ToString("0,000") + " AUD/year"; researcherdetail.PreviousPositions = researcherController.LoadPreviousPosition(selectedresearcher);
-                    researcherdetail.SupervisionNumber = researcherController.CalculateSupervision(selectedstaff).ToString();
-                    researcherdetail.StudentNames = researcherController.LoadSupervision(selectedstaff);
-                }
                 researcherdetail.Show();
             }
         }
