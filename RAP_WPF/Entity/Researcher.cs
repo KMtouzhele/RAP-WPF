@@ -39,15 +39,7 @@ namespace RAP_WPF.Entity
         {
             get
             {
-                List<Publication> publications = PublicationController.LoadPubCountFor(GivenName, FamilyName);
-                int count = publications.Count;
-                var q1 = from pub in publications
-                         where pub.Ranking == AllEnum.OutputRanking.Q1
-                         select pub;
-                int q1count = q1.Count();
-                float q1percentage = (float)q1count / count;
-                return q1percentage;
-
+                return PublicationController.LoadQ1PercentageFor(this);
             }
         }
 

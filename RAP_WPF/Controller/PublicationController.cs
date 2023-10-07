@@ -22,14 +22,22 @@ namespace RAP_WPF.Controller
             return DBAdapter.Relation();
         }
 
-        public static List<Publication> LoadPubCountFor(string givenname, string familyname)
+        public static float LoadQ1PercentageFor(Researcher researcher)
         {
             List<Publication> publications = PublicationController.LoadAllPublications();
-            string name = givenname + " " + familyname;
+            string name = researcher.GivenName + " " + researcher.FamilyName;
             var selectedpub = from pub in publications
                               where pub.Author.Contains(name)
                               select pub;
-            return (List<Publication>)selectedpub.ToList();
+            List<Publication> publicationFor = (List<Publication>)selectedpub.ToList();
+
+            int count = publicationFor.Count;
+            var q1 = from pub in publicationFor
+                     where pub.Ranking == AllEnum.OutputRanking.Q1
+                     select pub;
+            int q1count = q1.Count();
+            float q1percentage = (float)q1count / count;
+            return q1percentage;
         }
 
 
