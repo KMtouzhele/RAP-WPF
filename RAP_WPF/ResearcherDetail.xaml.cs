@@ -32,6 +32,8 @@ namespace RAP_WPF
         public string CurrentStart { get; set; }
         public string Tenure { get; set; }
         public string Q1Percentage { get; set; }
+        public string FundingRecieved { get; set; }
+        public string Performance { get; set; }
         public string ThreeYearAverage { get; set; }
         public string PerformanceByPublications { get; set; }
         public string PerformanceByFunding { get; set; }
@@ -69,7 +71,7 @@ namespace RAP_WPF
             UtasStart = researcher.UtasStart.ToString("yyyy-MM-dd");
             CurrentStart = researcher.CurrentStart.ToString("yyyy-MM-dd");
             Tenure = researcher.Tenure.ToString("0.00") + " years";
-            Q1Percentage = researcher.Q1Percentage.ToString();
+            Q1Percentage = researcher.Q1Percentage.ToString("P");
             ThreeYearAverage = ResearcherController.ThreeYearAverage(researcher).ToString();
             Cumulative = PublicationController.LoadCumulativeNumber(researcher);
 
@@ -84,6 +86,8 @@ namespace RAP_WPF
             else
             {
                 Staff selectedstaff = (Staff)researcher;
+                FundingRecieved = "AUD "+PublicationController.FundingRecieved(selectedstaff).ToString("0,000");
+                Performance = ResearcherController.Performance(selectedstaff).ToString("P");
                 PerformanceByPublications = selectedstaff.PerformanceByPublicaton.ToString("0") + " publications per year";
                 PerformanceByFunding = PublicationController.FundingPerformance(researcher).ToString("0,000") + " AUD/year";
                 PreviousPositions = ResearcherController.LoadPreviousPosition(researcher);
@@ -136,6 +140,8 @@ namespace RAP_WPF
         //Function that filter publication list based on the input year range
         private void Search(object sender, RoutedEventArgs e)
         {
+
+            //Verify if the input is valid or not
             if (!int.TryParse(Start.Text, out int start) || !int.TryParse(End.Text, out int end))
             {
                 MessageBox.Show("Please enter 4-digit years in both Start and End fields.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Error);

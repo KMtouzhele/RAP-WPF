@@ -137,7 +137,7 @@ namespace RAP_WPF.Controller
                 for (int i = 0; i < previousposition.Count - 1; i++)
                 {
                     //Debug.WriteLine($"Position {i + 1}: Id={previousposition[i].Id}, Level={previousposition[i].Level}, Start={previousposition[i].Start}");
-                    positions += previousposition[i].Start.ToString("yyyy-MM-dd") + " to " + previousposition[i].End.ToString("yyyy-MM-dd") + "  " + previousposition[i].Title + "\n";
+                    positions += previousposition[i].Title + ": \n"+ previousposition[i].Start.ToString("yyyy-MM-dd") + " to " + previousposition[i].End.ToString("yyyy-MM-dd") + "\n" ;
                 }
             }
             

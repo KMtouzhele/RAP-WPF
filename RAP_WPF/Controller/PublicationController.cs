@@ -42,19 +42,24 @@ namespace RAP_WPF.Controller
             return (List<Publication>)selectedpub.ToList();
         }
 
-        public static float FundingPerformance(Researcher researcher)
+        public static float FundingRecieved(Researcher researcher)
         {
 
             List<Publication> pubFunding = XmlAdapter.LoadAll();
             var validpub = from pub in pubFunding
-                            where pub.Staff.Contains(researcher.Id.ToString())
-                            where pub.Year >= researcher.UtasStart.Year
-                            select pub;
+                           where pub.Staff.Contains(researcher.Id.ToString())
+                           where pub.Year >= researcher.UtasStart.Year
+                           select pub;
 
             float totalFunding = validpub.Sum(pub => pub.Funding);
+            return totalFunding;
+        }
+
+        public static float FundingPerformance(Researcher researcher)
+        {
+            float totalFunding = FundingRecieved(researcher);
             float performancebyfunding = totalFunding / researcher.Tenure;
             return performancebyfunding;
-
         }
 
         //To load publications by specific researcher

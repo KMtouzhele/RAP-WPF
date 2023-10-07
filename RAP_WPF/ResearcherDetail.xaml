@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RAP_WPF"
         mc:Ignorable="d"
-        Title="ResearcherDetail" Height="900" Width="1200">
+        Title="ResearcherDetail" Height="800" Width="1000">
     <Border Padding="10">
         <StackPanel>
             <!-- Title -->
@@ -16,9 +16,9 @@
             <Border Padding="0,10,0,10">
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,5,0">
                         <Image VerticalAlignment="Top" Name="Photo"  Margin="0,0,0,10" Width="auto" HorizontalAlignment="Left" Source="{Binding PhotoSource}"/>
@@ -57,6 +57,10 @@
                         <StackPanel Name="ForStaff" Visibility="Collapsed">
                             <TextBlock Text="3 year average" FontWeight="Bold"/>
                             <TextBlock Text="{Binding ThreeYearAverage}" Margin="0,0,0,10"/>
+                            <TextBlock Text="Performance" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Performance}" Margin="0,0,0,10"/>
+                            <TextBlock Text="Funding Recieved" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding FundingRecieved}" Margin="0,0,0,10"/>
                             <TextBlock Text="Performance by publications" FontWeight="Bold"/>
                             <TextBlock Text="{Binding PerformanceByPublications}" Margin="0,0,0,10"/>
                             <TextBlock Text="Performance by funding" FontWeight="Bold"/>
@@ -121,7 +125,6 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
-
                     </Grid>
                 </Grid>
             </Border>
