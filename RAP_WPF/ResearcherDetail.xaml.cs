@@ -80,6 +80,7 @@ namespace RAP_WPF
             {
                 Student selectedstudent = (Student)researcher;
                 Supervisor = ResearcherController.LoadSupervisor(selectedstudent);
+                Degree = selectedstudent.Degree;
                 ForStudent.Visibility = Visibility.Visible;
             }
             //Staff page visibility and info

@@ -28,6 +28,8 @@
                 <!-- Dataform -->
                 <Grid Grid.Column="1">
                     <StackPanel>
+                        <local:ResearcherListFilterControl x:Name="ResearcherListFilterControl" Visibility="Visible"/>
+                        <!--
                         <Grid Margin="0,0,0,10" Name="Controller">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
@@ -52,6 +54,7 @@
                             </ComboBox>
                             <Button Grid.Column="6" Content="Reset" Click="Reset" Background="Black" Foreground="White" FontWeight="Bold" BorderBrush="Black"/>
                         </Grid>
+                        -->
                         <DataGrid Name="ResearcherList" AutoGenerateColumns="False" RowHeight="30" CanUserAddRows="False" MouseDoubleClick="SelectResearcher" Height="300" GridLinesVisibility="Horizontal" Background="#FFD2D2D2" >
                             
                             <DataGrid.Columns>

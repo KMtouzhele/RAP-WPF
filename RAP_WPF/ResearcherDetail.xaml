@@ -78,6 +78,8 @@
                             </Expander>
                         </StackPanel>
                         <StackPanel Name="ForStudent" Visibility="Collapsed">
+                            <TextBlock Text="Degree" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Degree}" Margin="0,0,0,10"/>
                             <TextBlock Text="Supervisor" FontWeight="Bold"/>
                             <TextBlock Text="{Binding Supervisor}" Margin="0,0,0,10"/>
                         </StackPanel>
