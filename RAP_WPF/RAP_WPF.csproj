@@ -108,16 +108,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataSource\XmlAdapter.cs" />
-    <Compile Include="PublicationDetail.xaml.cs">
+    <Compile Include="View\PublicationDetail.xaml.cs">
       <DependentUpon>PublicationDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ResearcherDetail.xaml.cs">
+    <Compile Include="View\ResearcherDetail.xaml.cs">
       <DependentUpon>ResearcherDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ResearcherListFilterControl.xaml.cs">
+    <Compile Include="View\ResearcherListFilterControl.xaml.cs">
       <DependentUpon>ResearcherListFilterControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -135,19 +135,19 @@
     <Compile Include="Entity\Researcher_Publication.cs" />
     <Compile Include="Entity\Staff.cs" />
     <Compile Include="Entity\Student.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PublicationDetail.xaml">
+    <Page Include="View\PublicationDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ResearcherDetail.xaml">
+    <Page Include="View\ResearcherDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ResearcherListFilterControl.xaml">
+    <Page Include="View\ResearcherListFilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,8 +185,6 @@
   <ItemGroup>
     <Resource Include="DataSource\Fundings_Rankings.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

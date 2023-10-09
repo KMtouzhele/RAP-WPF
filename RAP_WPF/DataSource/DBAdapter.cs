@@ -167,6 +167,8 @@ namespace RAP_WPF.DataSource
                     Debug.WriteLine("Mapped" + researcher.NameShown);
                 }
 
+                /*Researcher newResearcher = new Researcher { };
+                researchers.Add(newResearcher);*/
 
             }
             catch (MySqlException e)
