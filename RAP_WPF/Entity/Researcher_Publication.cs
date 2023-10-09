@@ -17,4 +17,4 @@ namespace RAP_WPF.Entity
             DOI = "";
         }
     }
-}
+} 

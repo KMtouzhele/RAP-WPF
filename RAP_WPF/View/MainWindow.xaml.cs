@@ -51,87 +51,6 @@ namespace RAP_WPF
 
         }
 
-        /*        //Process the list with Level filter and Name searching at the same time
-                private List<Researcher> FilterAndDisplayResults()
-                {
-                    ComboBoxItem selecteditem = (ComboBoxItem)FilterByLevel.SelectedItem;
-                    ResearcherController researcherController = new ResearcherController();
-                    List<Researcher> result = new List<Researcher>();
-                    if (selecteditem != null)
-                    {
-                        string selectedcontent = selecteditem.Content.ToString();
-                        AllEnum.EmploymentLevel selectedlevel = AllEnum.EmploymentLevel.Student;
-
-                        switch (selectedcontent)
-                        {
-                            case "Level A":
-                                selectedlevel = AllEnum.EmploymentLevel.A;
-                                break;
-                            case "Level B":
-                                selectedlevel = AllEnum.EmploymentLevel.B;
-                                break;
-                            case "Level C":
-                                selectedlevel = AllEnum.EmploymentLevel.C;
-                                break;
-                            case "Level D":
-                                selectedlevel = AllEnum.EmploymentLevel.D;
-                                break;
-                            case "Level E":
-                                selectedlevel = AllEnum.EmploymentLevel.E;
-                                break;
-                            case "Student":
-                                selectedlevel = AllEnum.EmploymentLevel.Student;
-                                break;
-                            default:
-                                break;
-                        }
-                        List<Researcher> filteredresearchersByLevel = ResearcherController.FilterByLevel(DBAdapter.AllResearchers(), selectedlevel);
-                        if (SearchBox.Text != null)
-                        {
-                            string input = SearchBox.Text;
-                            result = ResearcherController.FilterByName(filteredresearchersByLevel, input);
-                        }
-                        else
-                        {
-                            result = filteredresearchersByLevel;
-                        }
-                    }
-                    else
-                    {
-                        if (SearchBox.Text != null)
-                        {
-                            string input = SearchBox.Text;
-                            result = ResearcherController.FilterByName(DBAdapter.AllResearchers(), input);
-                        }
-                        else
-                        {
-                            result = DBAdapter.AllResearchers();
-                        }
-                    }
-                    return result;
-
-                }
-
-                //ComboBox call the function above
-                private void filtered(object sender, SelectionChangedEventArgs e)
-                {
-                    ResearcherList.ItemsSource = FilterAndDisplayResults();
-                }
-
-                //SearchBox call the function above
-                private void Search(object sender, RoutedEventArgs e)
-                {
-                    ResearcherList.ItemsSource = FilterAndDisplayResults();
-                }
-
-
-                //Click to show the default researcher list
-                private void Reset(object sender, RoutedEventArgs e)
-                {
-                    ResearcherList.ItemsSource = DBAdapter.AllResearchers();
-                    SearchBox.Text = "";
-                    FilterByLevel.SelectedItem = null;
-                }*/
 
         //Double click to open a new window for researcher details
         public void UpdateDataGridItemsSource(IEnumerable<object> items)
@@ -142,8 +61,6 @@ namespace RAP_WPF
         private void SelectResearcher(object sender, MouseButtonEventArgs e)
         {
             Researcher selectedresearcher = (Researcher)ResearcherList.SelectedItem;
-            ResearcherController researcherController = new ResearcherController();
-            PublicationController publicationController = new PublicationController();
 
             if (selectedresearcher != null)
             {
