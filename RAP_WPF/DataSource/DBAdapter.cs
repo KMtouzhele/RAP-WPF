@@ -164,10 +164,25 @@ namespace RAP_WPF.DataSource
                         researcher =staff;
                     }
                     researchers.Add(researcher);
-                    Debug.WriteLine("Mapped" + researcher.NameShown);
+                    //Debug.WriteLine("Mapped" + researcher.NameShown);
                 }
-
-                /*Researcher newResearcher = new Researcher { };
+                
+                /*Researcher newResearcher = new Researcher
+                {
+                    Id = 999,
+                    Type = AllEnum.ReseacherType.Student,
+                    GivenName = "White",
+                    FamilyName = "Box",
+                    Title = AllEnum.Title.Mrs,
+                    School = "TestSchool",
+                    Campus = AllEnum.Campus.Cradle_Coast,
+                    Email = "test@test.com",
+                    Photo = "https://www.bing.com/images/search?view=detailV2&ccid=jyFm8SOz&id=26E66C84DC0AB855CC5B7A4DBCCC317A554CB481&thid=OIP.jyFm8SOzN9ylA06RmfOdEQHaE7&mediaurl=https%3a%2f%2fd.newsweek.com%2fen%2ffull%2f1369492%2fgoogle-logo.jpg&exph=1666&expw=2500&q=google+image&simid=608005724315471809&FORM=IRPRST&ck=C21FA179CD914CF7D4C5D123BAE8A862&selectedIndex=1&ajaxhist=0&ajaxserp=0",
+                    Level = AllEnum.EmploymentLevel.E,
+                    UtasStart = new DateTime(2020,01,01),
+                    CurrentStart = new DateTime(2023,10,01),
+                    JobTitle = position.GetToTitle(AllEnum.EmploymentLevel.E),
+                };
                 researchers.Add(newResearcher);*/
 
             }

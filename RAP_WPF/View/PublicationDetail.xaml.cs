@@ -23,6 +23,7 @@ namespace RAP_WPF
     public partial class PublicationDetail : Window
     {
         public string DOI { get; set; }
+        public string PubTitle { get; set; }
         public string Authors { get; set; }
         public string Year { get; set; }
         public string Ranking { get; set; }
@@ -36,13 +37,14 @@ namespace RAP_WPF
             InitializeComponent();
             DataContext = this;
             DOI = publication.DOI;
+            PubTitle = publication.Title;
             Authors = publication.Author;
             Ranking = publication.Ranking.ToString();
             Type = publication.Type.ToString();
             CiteAs = publication.CiteAs;
             Year = publication.Year.ToString();
             Available = publication.Available.ToString("yyyy-MM-dd");
-            Age = publication.Age.ToString("0,000") + " days";
+            Age = publication.Age.ToString() + " days";
         }
     }
 }

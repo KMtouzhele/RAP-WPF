@@ -17,6 +17,8 @@
                 <StackPanel>
                     <TextBlock Text="DOI" FontWeight="Bold"/>
                     <TextBlock Text="{Binding DOI}"  Margin="0,0,0,10"/>
+                    <TextBlock Text="Title" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding PubTitle}"  Margin="0,0,0,10" TextWrapping="Wrap"/>
                     <TextBlock Text="Authors" FontWeight="Bold"/>
                     <TextBlock Text="{Binding Authors}" Margin="0,0,0,10"/>
                     <TextBlock Text="Publication year" FontWeight="Bold"/>
