@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using RAP_WPF.Entity;
 using RAP_WPF.DataSource;
 using RAP_WPF.Controller;
+using RAP_WPF.WhiteBoxTest;
 
 namespace RAP_WPF
 {
@@ -49,6 +50,8 @@ namespace RAP_WPF
                     select researcher;
             StarPerformancer.ItemsSource = r4.ToList();
 
+            //Every time launched window, white box test code could be activated and could see the outcome via OutPut window
+            //WhiteBox.TestFilterByName();
         }
 
 
@@ -134,5 +137,7 @@ namespace RAP_WPF
                 }
             }
         }
+
+        
     }
 }

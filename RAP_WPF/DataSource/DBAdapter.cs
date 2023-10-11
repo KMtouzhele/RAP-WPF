@@ -122,7 +122,7 @@ namespace RAP_WPF.DataSource
 
                     if (researcher.Type == AllEnum.ReseacherType.Student)
                     {
-                        Debug.WriteLine("Load Student");
+                        //Debug.WriteLine("Load Student");
                         Student student = new Student();
                         student.Id = rdr.GetInt32(0);
                         student.Type = ParseEnum<AllEnum.ReseacherType>(rdr.GetString(1));
@@ -145,7 +145,7 @@ namespace RAP_WPF.DataSource
 
                     else
                     {
-                        Debug.WriteLine("Load Staff");
+                        //Debug.WriteLine("Load Staff");
                         Staff staff = new Staff();
                         staff.Id = rdr.GetInt32(0);
                         staff.Type = ParseEnum<AllEnum.ReseacherType>(rdr.GetString(1));
@@ -166,25 +166,6 @@ namespace RAP_WPF.DataSource
                     researchers.Add(researcher);
                     //Debug.WriteLine("Mapped" + researcher.NameShown);
                 }
-                
-                /*Researcher newResearcher = new Researcher
-                {
-                    Id = 999,
-                    Type = AllEnum.ReseacherType.Student,
-                    GivenName = "White",
-                    FamilyName = "Box",
-                    Title = AllEnum.Title.Mrs,
-                    School = "TestSchool",
-                    Campus = AllEnum.Campus.Cradle_Coast,
-                    Email = "test@test.com",
-                    Photo = "https://www.bing.com/images/search?view=detailV2&ccid=jyFm8SOz&id=26E66C84DC0AB855CC5B7A4DBCCC317A554CB481&thid=OIP.jyFm8SOzN9ylA06RmfOdEQHaE7&mediaurl=https%3a%2f%2fd.newsweek.com%2fen%2ffull%2f1369492%2fgoogle-logo.jpg&exph=1666&expw=2500&q=google+image&simid=608005724315471809&FORM=IRPRST&ck=C21FA179CD914CF7D4C5D123BAE8A862&selectedIndex=1&ajaxhist=0&ajaxserp=0",
-                    Level = AllEnum.EmploymentLevel.E,
-                    UtasStart = new DateTime(2020,01,01),
-                    CurrentStart = new DateTime(2023,10,01),
-                    JobTitle = position.GetToTitle(AllEnum.EmploymentLevel.E),
-                };
-                researchers.Add(newResearcher);*/
-
             }
             catch (MySqlException e)
             {
@@ -270,7 +251,7 @@ namespace RAP_WPF.DataSource
                         End = rdr.GetDateTime(3),
                     };
                     positions.Add(newPosition);
-                    Debug.WriteLine($"Added Position: Id={newPosition.Id}, Level={newPosition.Level}, Start={newPosition.Start}, End={newPosition.End}");
+                    //Debug.WriteLine($"Added Position: Id={newPosition.Id}, Level={newPosition.Level}, Start={newPosition.Start}, End={newPosition.End}");
                 }
             }
             catch (MySqlException e)

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using RAP_WPF.Entity;
 using RAP_WPF.DataSource;
 using RAP_WPF.Controller;
+using RAP_WPF.WhiteBoxTest;
 
 namespace RAP_WPF
 {
@@ -51,6 +52,8 @@ namespace RAP_WPF
             InitializeComponent();
             DataContext = this;
             _researcher = researcher;
+            //List<Publication> test = WhiteBox.AddFakePublication(PublicationController.LoadPublicationFor(researcher));
+            //PublicationList.ItemsSource = test;
             PublicationList.ItemsSource = PublicationController.LoadPublicationFor(researcher);
 
             PhotoSource = new BitmapImage(new Uri(researcher.Photo));
@@ -98,6 +101,8 @@ namespace RAP_WPF
                 PositionLabel.Visibility = Visibility.Visible;
                 Position.Visibility = Visibility.Visible;
             }
+            
+
         }
 
         //Open a new Window to show publication details

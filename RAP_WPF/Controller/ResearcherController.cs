@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RAP_WPF.Entity;
 using RAP_WPF.DataSource;
 using System.Diagnostics;
+using RAP_WPF.WhiteBoxTest;
 
 namespace RAP_WPF.Controller
 {
@@ -33,6 +34,7 @@ namespace RAP_WPF.Controller
             return (List<Researcher>)r.ToList();
         }
 
+
         public static string LoadSupervision(Staff staff)
         {
             List<Student> students = LoadAllResearchers().OfType<Student>().ToList();
@@ -58,6 +60,8 @@ namespace RAP_WPF.Controller
                     where student.Supervisor == staff.Id
                     select student;
             List<Student> supervisions = (List<Student>)s.ToList();
+
+            //WhiteBox.SupervisionPreview(supervisions);
             return supervisions.Count;
         }
 
@@ -72,6 +76,7 @@ namespace RAP_WPF.Controller
             List<Publication> selectedpublications = (List<Publication>)selectedpub.ToList();
             return (double)selectedpublications.Count / 3;
         }
+
         public static double Performance(Staff researcher)
         {
             double expectednumber = 1;
@@ -119,7 +124,7 @@ namespace RAP_WPF.Controller
         //To load previous positions
         public static string LoadPreviousPosition(Researcher researcher)
         {
-            Debug.WriteLine("Loading positions...");
+            //Debug.WriteLine("Loading positions...");
             List<Position> AllPosition = DBAdapter.AllPosition();
             DateTime currentDate = DateTime.Today;
             var p = from position in AllPosition

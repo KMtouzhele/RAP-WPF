@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RAP_WPF.Entity;
 using RAP_WPF.DataSource;
-using System.Diagnostics;
+using RAP_WPF.WhiteBoxTest;
 
 namespace RAP_WPF.Controller
 {
@@ -93,14 +93,19 @@ namespace RAP_WPF.Controller
         {
             string cumulative = "";
             List<Publication> publications = LoadPublicationFor(researcher);
-            for(int i = researcher.UtasStart.Year; i<DateTime.Today.Year +1; i++)
+            List<Publication> Cumulative = new List<Publication>();
+            for (int i = researcher.UtasStart.Year; i<DateTime.Today.Year +1; i++)
             {
                 var p = from pub in publications
                         where pub.Year == i
                         select pub;
-                List<Publication> Cumulative = (List<Publication>)p.ToList();
+                Cumulative = (List<Publication>)p.ToList();
+
+                //WhiteBox.PublicationPreview(Cumulative);
+
                 cumulative += i + ": " + Cumulative.Count +" in total \n";
             }
+            
             return cumulative;
         }
 
