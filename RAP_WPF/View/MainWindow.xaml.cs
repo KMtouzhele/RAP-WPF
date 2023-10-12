@@ -29,8 +29,9 @@ namespace RAP_WPF
             InitializeComponent();
             List<Researcher> researchers = DBAdapter.AllResearchers();
             ResearcherList.ItemsSource = researchers;
-            
+
             //Poor report
+            //Poor.ItemsSource = WhiteBox.AddFakeStaffByPeformance(ResearcherController.LoadResearcherByPerformance(0, 0.7));
             Poor.ItemsSource = ResearcherController.LoadResearcherByPerformance(0, 0.7);
 
             //Below expectations report
@@ -48,6 +49,7 @@ namespace RAP_WPF
             var r4 = from researcher in starperformancer
                     orderby researcher.Performance descending
                     select researcher;
+            //StarPerformancer.ItemsSource = WhiteBox.AddFakeStaffByPeformance(r4.ToList());
             StarPerformancer.ItemsSource = r4.ToList();
 
             //Every time launched window, white box test code could be activated and could see the outcome via OutPut window

@@ -12,8 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RAP_WPF.Entity;
-using RAP_WPF.Controller;
-using RAP_WPF.DataSource;
+using RAP_WPF.WhiteBoxTest;
 
 namespace RAP_WPF
 {
@@ -45,6 +44,7 @@ namespace RAP_WPF
             Year = publication.Year.ToString();
             Available = publication.Available.ToString("yyyy-MM-dd");
             Age = publication.Age.ToString() + " days";
+            //WhiteBox.PublicationPreview(WhiteBox.AddFakePublication(new List<Publication>()));
         }
     }
 }
