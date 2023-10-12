@@ -75,7 +75,7 @@ namespace RAP_WPF
             CurrentStart = researcher.CurrentStart.ToString("yyyy-MM-dd");
             Tenure = researcher.Tenure.ToString("0.00") + " years";
             Q1Percentage = researcher.Q1Percentage.ToString("P");
-            ThreeYearAverage = ResearcherController.ThreeYearAverage(researcher).ToString();
+            ThreeYearAverage = ResearcherController.ThreeYearAverage(researcher).ToString("0.00");
             Cumulative = PublicationController.LoadCumulativeNumber(researcher);
 
             //Student page visibility and info

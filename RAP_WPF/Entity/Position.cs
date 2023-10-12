@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,6 @@ namespace RAP_WPF.Entity
         public AllEnum.EmploymentLevel Level { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public string ToTitle { get; set; }
 
         public string Title
         {
@@ -45,7 +44,7 @@ namespace RAP_WPF.Entity
 
         public Position()
         {
-            Level = AllEnum.EmploymentLevel.Student;
+            
         }
         
         public override string ToString()

@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RAP_WPF.Entity;
-using RAP_WPF.DataSource;
 using RAP_WPF.Controller;
 using RAP_WPF.WhiteBoxTest;
 
@@ -27,7 +26,7 @@ namespace RAP_WPF
         public MainWindow()
         {
             InitializeComponent();
-            List<Researcher> researchers = DBAdapter.AllResearchers();
+            List<Researcher> researchers = ResearcherController.LoadAllResearchers();
             ResearcherList.ItemsSource = researchers;
 
             //Poor report
