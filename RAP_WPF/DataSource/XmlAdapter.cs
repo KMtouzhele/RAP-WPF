@@ -13,7 +13,7 @@ namespace RAP_WPF.DataSource
 {
     public static class XmlAdapter
     {
-        private static string filePath = "C:\\Users\\kaimol\\source\\repos\\RAP-WPF\\RAP_WPF\\DataSource\\Fundings_Rankings.xml";
+        private static string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataSource\\Fundings_Rankings.xml");
         public static List<Publication> LoadAll()
         {
             /*Debug.WriteLine("Start loading");*/
